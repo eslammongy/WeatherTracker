@@ -45,7 +45,7 @@ app.*.map.json
 /android/app/release
 
 #desktop
-linux/flutter/generated_plugin_registrant.cc
+linux/flutter/generated_plugin_registrant.h
 windows/flutter/generated_plugins.cmake
 windows/flutter/generated_plugins.cmake
 windows/flutter/generated_plugin_registrant.cc
@@ -54,10 +54,3 @@ linux/flutter/generated_plugins.cmake
 linux/flutter/generated_plugin_registrant.cc
 lib/core/constants/test.json
 /installer/
-
-# Rust related
-.cargo/
-target/
-
-# Generated messages
-*/**/messages/
