@@ -17,7 +17,7 @@ class AppTheme {
   }();
 
   static final _lightAppColors = AppColorEx(
-    primary: const Color(0xFF8B5CF9),
+    primary: const Color(0xFF35ADE8),
     onPrimary: Colors.white,
     secondary: const Color(0xff03dac6),
     onSecondary: Colors.black,

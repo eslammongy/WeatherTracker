@@ -49,7 +49,10 @@ DioException badResponse(Response response) {
   return dioError;
 }
 
-Center displayLoadingWidget({String loadingMsg = "loading..."}) {
+Center displayLoadingWidget(
+  BuildContext context, {
+  String loadingMsg = "please waiting...",
+}) {
   return Center(
       child: Column(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +61,7 @@ Center displayLoadingWidget({String loadingMsg = "loading..."}) {
       Text(
         loadingMsg,
         textAlign: TextAlign.center,
-        style: TextStyles.font16SemiBold,
+        style: AppTextStyles.styleBold16(context),
       ),
     ],
   ));
