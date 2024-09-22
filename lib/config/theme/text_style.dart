@@ -51,6 +51,20 @@ abstract class AppTextStyles {
     );
   }
 
+  static TextStyle styleSemiBold30(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 30),
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+  static TextStyle styleBold52(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 52),
+      fontWeight: FontWeight.w700,
+    );
+  }
+
   static TextStyle styleRegular12(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveFontSize(context, fontSize: 12),

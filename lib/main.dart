@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:weather_tracker/features/home/adaptive_home_screen.dart';
 
@@ -17,8 +18,9 @@ class MyWeatherApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.dark,
       home: const AdaptiveHomeScreen(),
     );
   }
