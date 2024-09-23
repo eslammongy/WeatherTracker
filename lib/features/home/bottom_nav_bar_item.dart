@@ -39,13 +39,13 @@ class BottomNavItem extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: FaIcon(icon,
-                  size: 18, color: isActive ? Colors.white : Colors.grey),
+                  size: 24, color: isActive ? Colors.white : Colors.grey),
             ),
           ),
           if (isActive)
             Text(
               title,
-              style: AppTextStyles.styleRegular14(context).copyWith(
+              style: AppTextStyles.styleSemiBold16(context).copyWith(
                 color: context.theme.appColors.onSurface,
                 letterSpacing: 1.2,
               ),

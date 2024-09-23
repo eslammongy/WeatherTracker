@@ -32,7 +32,7 @@ class FloatingBottomNavBar extends StatelessWidget {
           children: [
             BottomNavItem(
               title: "Weather",
-              icon: FontAwesomeIcons.cloud,
+              icon: FontAwesomeIcons.cloudSun,
               isActive: currentIndex == 0 ? true : false,
               onTap: () {
                 getCurrentIndex(0);
@@ -40,7 +40,7 @@ class FloatingBottomNavBar extends StatelessWidget {
             ),
             BottomNavItem(
               title: "Forecast",
-              icon: FontAwesomeIcons.dailymotion,
+              icon: FontAwesomeIcons.snowflake,
               isActive: currentIndex == 1 ? true : false,
               onTap: () {
                 getCurrentIndex(1);
