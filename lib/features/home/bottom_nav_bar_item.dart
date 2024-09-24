@@ -45,7 +45,7 @@ class BottomNavItem extends StatelessWidget {
           if (isActive)
             Text(
               title,
-              style: AppTextStyles.styleSemiBold16(context).copyWith(
+              style: AppTextStyles.styleSemiBold18(context).copyWith(
                 color: context.theme.appColors.onSurface,
                 letterSpacing: 1.2,
               ),

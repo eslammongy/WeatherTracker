@@ -29,15 +29,18 @@ class CurrentWeatherScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            SizedBox(
-              height: 160,
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return const HourlyWeatherItem();
-                },
+            Padding(
+              padding: const EdgeInsets.only(bottom: 110.0),
+              child: SizedBox(
+                height: 160,
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return const HourlyWeatherItem();
+                  },
+                ),
               ),
             )
           ],
