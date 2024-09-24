@@ -17,7 +17,7 @@ class AppTheme {
   }();
 
   static final _lightAppColors = AppColorEx(
-    primary: const Color(0xFF35ADE8),
+    primary: const Color(0xFF6835DE),
     onPrimary: Colors.white,
     secondary: const Color(0xff03dac6),
     onSecondary: Colors.black,
@@ -41,15 +41,15 @@ class AppTheme {
   }();
 
   static final _darkAppColors = AppColorEx(
-    primary: const Color(0xFF8B5CF9),
+    primary: const Color(0xFF6835DE),
     onPrimary: Colors.black,
     secondary: const Color(0xff03dac6),
     onSecondary: Colors.black,
     error: const Color(0xffff3201),
     onError: Colors.black,
-    background: const Color(0xff262626),
+    background: const Color(0xff121212),
     onBackground: Colors.white,
-    surface: const Color(0xff121212),
+    surface: const Color(0xff262626),
     onSurface: Colors.white,
     tertiary: const Color(0xFF3D3D3D),
   );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:weather_tracker/core/utils/animated_dialog.dart';
 import 'package:weather_tracker/features/weather/presentation/views/widgets/weather_info_card.dart';
 
 class WeatherDetailsWrap extends StatelessWidget {
@@ -52,14 +53,41 @@ class WeatherDetailsWrap extends StatelessWidget {
                 end: Alignment.bottomCenter,
               ),
               borderRadius: BorderRadius.all(Radius.circular(15))),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(FontAwesomeIcons.arrowRight, size: 20),
-              const SizedBox(height: 10),
-              Text("View More...", style: AppTextStyles.styleMedium18(context)),
-              const SizedBox(height: 5),
-            ],
+          child: InkWell(
+            onTap: () {
+              showAnimatedDialog(context,
+                  title: "Weather Details",
+                  body: Expanded(
+                    child: GridView.builder(
+                      itemBuilder: (context, index) {
+                        return const WeatherInfoCard(
+                          icon: FontAwesomeIcons.droplet,
+                          title: 'Humidity',
+                          value: '65%',
+                        );
+                      },
+                      itemCount: 10,
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // 2 columns
+                        crossAxisSpacing: 10, // Space between columns
+                        mainAxisSpacing: 10, // Space between rows
+                        childAspectRatio: 1, // Aspect ratio of grid items
+                      ),
+                    ),
+                  ));
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(FontAwesomeIcons.arrowRight, size: 20),
+                const SizedBox(height: 10),
+                Text("View More...",
+                    style: AppTextStyles.styleMedium18(context)),
+                const SizedBox(height: 5),
+              ],
+            ),
           ),
         ),
       ],

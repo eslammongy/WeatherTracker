@@ -87,3 +87,10 @@ void displaySnackBar(
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
+
+get staticBoxShadow => BoxShadow(
+      color: Colors.grey.withOpacity(0.2), // Shadow color with transparency
+      spreadRadius: 1, // How far the shadow extends
+      blurRadius: 2, // Blur effect
+      offset: const Offset(1, 1), // Shadow position (x, y)
+    );

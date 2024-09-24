@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_tracker/core/utils/helper.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -20,13 +21,7 @@ class HourlyWeatherItem extends StatelessWidget {
               end: Alignment.bottomCenter,
             ),
             boxShadow: [
-              BoxShadow(
-                color: Colors.indigo
-                    .withOpacity(0.2), // Shadow color with transparency
-                spreadRadius: 2, // How far the shadow extends
-                blurRadius: 2, // Blur effect
-                offset: const Offset(1, 0), // Shadow position (x, y)
-              ),
+              staticBoxShadow,
             ],
             borderRadius: const BorderRadius.all(Radius.circular(15))),
         child: Column(
