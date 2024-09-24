@@ -50,10 +50,10 @@ Row _buildDialogTitle(ThemeData theme, String title, BuildContext context) {
       Card(
         color: theme.appColors.primary,
         child: Padding(
-          padding: const EdgeInsets.all(6.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           child: Text(
             title,
-            style: AppTextStyles.styleSemiBold18(context),
+            style: AppTextStyles.styleSemiBold20(context),
           ),
         ),
       ),
