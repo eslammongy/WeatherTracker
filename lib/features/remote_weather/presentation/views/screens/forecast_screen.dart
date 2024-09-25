@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_tracker/core/utils/animated_dialog.dart';
-import 'package:weather_tracker/features/forecast/presentation/views/widgets/forecast_list_item.dart';
-import 'package:weather_tracker/features/weather/presentation/views/screens/current_weather_screen.dart';
+import 'package:weather_tracker/features/remote_weather/presentation/views/screens/current_weather_screen.dart';
+import 'package:weather_tracker/features/remote_weather/presentation/views/widgets/forecast/forecast_list_item.dart';
 
 class ForeCastScreen extends StatelessWidget {
   const ForeCastScreen({super.key});

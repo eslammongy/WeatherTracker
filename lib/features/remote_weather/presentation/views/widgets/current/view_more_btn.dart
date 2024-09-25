@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_tracker/core/utils/animated_dialog.dart';
-import 'package:weather_tracker/features/weather/presentation/views/widgets/weather_info_card.dart';
+import 'package:weather_tracker/features/remote_weather/presentation/views/widgets/current/weather_info_card.dart';
 
 class ViewMoreBtn extends StatelessWidget {
   const ViewMoreBtn({
