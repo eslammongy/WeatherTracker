@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:weather_tracker/features/weather/presentation/views/widgets/weather_info_card.dart';
+import 'package:weather_tracker/features/remote_weather/presentation/views/widgets/current/view_more_btn.dart';
+import 'package:weather_tracker/features/remote_weather/presentation/views/widgets/current/weather_info_card.dart';
 
 class WeatherDetailsWrap extends StatelessWidget {
   const WeatherDetailsWrap({super.key});
@@ -41,11 +42,7 @@ class WeatherDetailsWrap extends StatelessWidget {
           title: 'Wind Speed',
           value: '15 km/h',
         ),
-        WeatherInfoCard(
-          icon: FontAwesomeIcons.arrowRight,
-          title: 'view more',
-          iconSize: 20,
-        ),
+        ViewMoreBtn(),
       ],
     );
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
-import 'package:weather_tracker/features/weather/presentation/views/widgets/hourly_weather_item.dart';
-import 'package:weather_tracker/features/weather/presentation/views/widgets/weather_details_wrap.dart';
-import 'package:weather_tracker/features/weather/presentation/views/widgets/current_weather_conatiner.dart';
+import 'package:weather_tracker/features/remote_weather/presentation/views/widgets/current/hourly_weather_item.dart';
+import 'package:weather_tracker/features/remote_weather/presentation/views/widgets/current/weather_details_wrap.dart';
+import 'package:weather_tracker/features/remote_weather/presentation/views/widgets/current/current_weather_container.dart';
 
 class CurrentWeatherScreen extends StatelessWidget {
   const CurrentWeatherScreen({super.key});
@@ -29,15 +29,18 @@ class CurrentWeatherScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            SizedBox(
-              height: 160,
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return const HourlyWeatherItem();
-                },
+            Padding(
+              padding: const EdgeInsets.only(bottom: 110.0),
+              child: SizedBox(
+                height: 160,
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return const HourlyWeatherItem();
+                  },
+                ),
               ),
             )
           ],

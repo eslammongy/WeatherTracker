@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_tracker/core/utils/helper.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,12 +12,16 @@ class CurrentWeatherContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = context.theme;
+
     return Container(
       padding: const EdgeInsets.all(16),
       width: double.maxFinite,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: theme.appColors.surface,
+        boxShadow: [
+          staticBoxShadow,
+        ],
       ),
       child: Column(
         children: [
@@ -32,13 +37,20 @@ class CurrentWeatherContainer extends StatelessWidget {
                 width: 10,
               ),
               Text(
-                "Egypt, ",
+                "Egypt",
                 style: AppTextStyles.styleSemiBold30(context),
               ),
 
-              Text(
-                "Cairo",
-                style: AppTextStyles.styleMedium20(context),
+              Card(
+                color: theme.appColors.primary,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
+                  child: Text(
+                    "Cairo",
+                    style: AppTextStyles.styleMedium20(context),
+                  ),
+                ),
               ),
             ],
           ),
