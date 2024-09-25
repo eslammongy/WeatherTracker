@@ -8,20 +8,23 @@ class ForeCastScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      itemCount: 12,
-      itemBuilder: (context, index) {
-        return InkWell(
-            onTap: () {
-              showAnimatedDialog(
-                context,
-                title: "Day-12/02/2022",
-                body: const CurrentWeatherScreen(),
-              );
-            },
-            child: const ForecastListItem());
-      },
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: 12,
+        itemBuilder: (context, index) {
+          return InkWell(
+              onTap: () {
+                showAnimatedDialog(
+                  context,
+                  title: "Day-12/02/2022",
+                  body: const CurrentWeatherScreen(),
+                );
+              },
+              child: const ForecastListItem());
+        },
+      ),
     );
   }
 }

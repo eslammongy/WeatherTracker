@@ -27,7 +27,7 @@ class AppTheme {
     onBackground: Colors.black,
     surface: const Color(0xFFEDEDED),
     onSurface: Colors.black,
-    tertiary: const Color.fromARGB(255, 245, 235, 235),
+    tertiary: const Color(0xFFA1A1A1),
   );
 
   static final dark = () {
@@ -51,7 +51,7 @@ class AppTheme {
     onBackground: Colors.white,
     surface: const Color(0xff262626),
     onSurface: Colors.white,
-    tertiary: const Color(0xFF3D3D3D),
+    tertiary: const Color(0xFFB1B1B1),
   );
 }
 

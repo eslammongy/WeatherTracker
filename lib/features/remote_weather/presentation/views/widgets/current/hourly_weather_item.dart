@@ -27,11 +27,16 @@ class HourlyWeatherItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text("12:00", style: AppTextStyles.styleSemiBold20(context)),
+            Text("12:00",
+                style: AppTextStyles.styleSemiBold20(context)
+                    .copyWith(color: Colors.white)),
             const SizedBox(height: 10),
-            const Icon(FontAwesomeIcons.cloudRain, size: 40),
+            const Icon(FontAwesomeIcons.cloudRain,
+                size: 40, color: Colors.white),
             const SizedBox(height: 10),
-            Text('24°C', style: AppTextStyles.styleSemiBold24(context)),
+            Text('24°C',
+                style: AppTextStyles.styleSemiBold24(context)
+                    .copyWith(color: Colors.white)),
           ],
         ),
       ),

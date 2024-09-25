@@ -3,6 +3,7 @@ import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/features/home/bottom_nav_bar.dart';
 import 'package:weather_tracker/features/remote_weather/presentation/views/screens/forecast_screen.dart';
 import 'package:weather_tracker/features/remote_weather/presentation/views/screens/current_weather_screen.dart';
+import 'package:weather_tracker/features/remote_weather/presentation/views/screens/search_for_city_screen.dart';
 
 class SmallHomeScreen extends StatefulWidget {
   const SmallHomeScreen({super.key});
@@ -17,6 +18,7 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
   final screens = [
     const CurrentWeatherScreen(),
     const ForeCastScreen(),
+    const SearchForCityScreen(),
   ];
 
   void toggleTheme() {

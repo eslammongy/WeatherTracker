@@ -22,20 +22,27 @@ class ViewMoreBtn extends StatelessWidget {
         width: width,
         height: height,
         child: InkWell(
-            borderRadius: BorderRadius.circular(100),
-            onTap: () {
-              showAnimatedDialog(
-                context,
-                title: "Weather Details",
-                body: _buildMoreWeatherInfoGrid(),
-              );
-            },
-            child: const CircleAvatar(
-                backgroundColor: Colors.green,
-                radius: 32,
-                child: Icon(FontAwesomeIcons.arrowRight, size: 20))),
+          borderRadius: BorderRadius.circular(100),
+          onTap: () {
+            showAnimatedDialog(
+              context,
+              title: "Weather Details",
+              body: _buildMoreWeatherInfoGrid(),
+            );
+          },
+          child: const CircleAvatar(
+            backgroundColor: Colors.green,
+            radius: 32,
+            child:
+                Icon(FontAwesomeIcons.ellipsis, size: 20, color: Colors.white),
+          ),
+        ),
       );
     }
+    return _buildDefaultViewMore(context);
+  }
+
+  Container _buildDefaultViewMore(BuildContext context) {
     return Container(
       width: width,
       height: height,
@@ -60,10 +67,12 @@ class ViewMoreBtn extends StatelessWidget {
             : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(FontAwesomeIcons.arrowRight, size: 20),
+                  const Icon(FontAwesomeIcons.arrowRight,
+                      size: 20, color: Colors.white),
                   const SizedBox(height: 10),
                   Text("View More...",
-                      style: AppTextStyles.styleMedium18(context)),
+                      style: AppTextStyles.styleMedium18(context)
+                          .copyWith(color: Colors.white)),
                   const SizedBox(height: 5),
                 ],
               ),

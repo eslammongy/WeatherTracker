@@ -48,7 +48,8 @@ class CurrentWeatherContainer extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
                   child: Text(
                     "Cairo",
-                    style: AppTextStyles.styleMedium20(context),
+                    style: AppTextStyles.styleMedium20(context)
+                        .copyWith(color: Colors.white),
                   ),
                 ),
               ),
