@@ -1,26 +1,27 @@
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 class InternetChecker {
   static final InternetChecker _instance = InternetChecker._internal();
-  static bool _hasConnection = false;
+  static bool hasConnection = false;
+  late final StreamSubscription<InternetStatus>? _subscription;
 
   InternetChecker._internal() {
     // Listen to status changes and update the connection status.
-
-    InternetConnectionChecker().onStatusChange.listen(
-      (status) {
-        _hasConnection = status == InternetConnectionStatus.connected;
-      },
-    );
+    if (_subscription == null) {
+      _subscription = InternetConnection().onStatusChange.listen((status) {
+        hasConnection = status == InternetStatus.connected;
+      });
+      AppLifecycleListener(
+        onResume: _subscription!.resume,
+        onHide: _subscription.pause,
+        onPause: _subscription.pause,
+      );
+    }
   }
 
   factory InternetChecker.init() {
     return _instance;
-  }
-
-  static Future<bool> checkConnection() async {
-    if (_hasConnection) return _hasConnection;
-    return await Future.delayed(
-        const Duration(milliseconds: 5), () => _hasConnection);
   }
 }
