@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
+import 'package:weather_tracker/core/widgets/weather_app_bar.dart';
 import 'package:weather_tracker/features/home/bottom_nav_bar.dart';
 import 'package:weather_tracker/features/remote_weather/presentation/views/screens/forecast_screen.dart';
 import 'package:weather_tracker/features/remote_weather/presentation/views/screens/current_weather_screen.dart';
@@ -28,8 +29,14 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
   }
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: WeatherAppBar(
+        onPressed: () {
+          toggleTheme();
+        },
+      ),
       backgroundColor: context.theme.appColors.background,
       body: screens[currentIndex],
       extendBody: true,
