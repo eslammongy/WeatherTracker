@@ -33,7 +33,10 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: WeatherAppBar(
-        onPressed: () {},
+        onPressed: () {
+          debugPrint(
+              "Internet Connection Status->${InternetChecker.hasConnection}");
+        },
       ),
       backgroundColor: context.theme.appColors.background,
       body: screens[currentIndex],
@@ -47,5 +50,11 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    InternetChecker.dispose();
   }
 }
