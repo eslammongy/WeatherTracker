@@ -2,37 +2,41 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
-class InternetChecker {
-  static final InternetChecker _instance = InternetChecker._internal();
+class InternetConnectivityChecker {
+  static final InternetConnectivityChecker _instance =
+      InternetConnectivityChecker._internal();
   static bool hasConnection = false;
-  static StreamSubscription<InternetStatus>? _subscription;
+  static StreamSubscription<InternetStatus>? subscription;
 
-  InternetChecker._internal() {
-    _startListening();
+  InternetConnectivityChecker._internal() {
+    checkInitialConnection();
   }
 
-  factory InternetChecker.init() {
+  factory InternetConnectivityChecker.init() {
     return _instance;
   }
 
-  void _startListening() {
-    // Only start listening if not already subscribed
-    _subscription ??= InternetConnection().onStatusChange.listen((status) {
-      hasConnection = status == InternetStatus.connected;
-    });
+  checkInitialConnection() async => hasConnection =
+      await InternetConnection().internetStatus == InternetStatus.connected;
 
+  static void startListening({
+    required Function(
+      StreamSubscription<InternetStatus>? subscription,
+    ) initSubscription,
+  }) async {
+    initSubscription(subscription);
     // Lifecycle management for pausing and resuming the subscription
     AppLifecycleListener(
-      onResume: () => _subscription?.resume(),
-      onHide: () => _subscription?.pause(),
-      onPause: () => _subscription?.pause(),
+      onResume: () => subscription?.resume(),
+      onHide: () => subscription?.pause(),
+      onPause: () => subscription?.pause(),
     );
   }
 
   static void dispose() {
     // Cancel subscription when it's no longer needed
-    _subscription?.cancel();
-    _subscription = null;
+    subscription?.cancel();
+    subscription = null;
   }
 }
 

@@ -26,7 +26,7 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
   @override
   void initState() {
     super.initState();
-    InternetChecker.init();
+    InternetConnectivityChecker.init();
   }
 
   @override
@@ -35,7 +35,7 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
       appBar: WeatherAppBar(
         onPressed: () {
           debugPrint(
-              "Internet Connection Status->${InternetChecker.hasConnection}");
+              "Internet Connection Status->${InternetConnectivityChecker.hasConnection}");
         },
       ),
       backgroundColor: context.theme.appColors.background,
@@ -55,6 +55,6 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
   @override
   void dispose() {
     super.dispose();
-    InternetChecker.dispose();
+    InternetConnectivityChecker.dispose();
   }
 }
