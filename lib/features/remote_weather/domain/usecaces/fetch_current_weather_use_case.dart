@@ -7,7 +7,13 @@ abstract class FetchCurrentWeatherUseCase {
   final WeatherRepository weatherRepository;
 
   FetchCurrentWeatherUseCase({required this.weatherRepository});
-  Future<Either<Failure, WeatherEntity>> execute() {
-    return weatherRepository.fetchCurrentWeatherInfo();
+  Future<Either<Failure, WeatherEntity>> execute({
+    required double lat,
+    required double lon,
+  }) {
+    return weatherRepository.fetchCurrentWeatherInfo(
+      lat: lat,
+      lon: lon,
+    );
   }
 }
