@@ -47,5 +47,8 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>com.apple.security.network.client</key>
+		<true/>
+
 	</dict>
 </plist>

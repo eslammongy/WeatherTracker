@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
+import 'package:weather_tracker/core/widgets/weather_app_bar.dart';
 import 'package:weather_tracker/features/home/bottom_nav_bar.dart';
+import 'package:weather_tracker/core/utils/internet_checker_service.dart';
 import 'package:weather_tracker/features/remote_weather/presentation/views/screens/forecast_screen.dart';
 import 'package:weather_tracker/features/remote_weather/presentation/views/screens/current_weather_screen.dart';
+import 'package:weather_tracker/features/remote_weather/presentation/views/screens/search_for_city_screen.dart';
 
 class SmallHomeScreen extends StatefulWidget {
   const SmallHomeScreen({super.key});
@@ -17,17 +20,24 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
   final screens = [
     const CurrentWeatherScreen(),
     const ForeCastScreen(),
+    const SearchForCityScreen(),
   ];
 
-  void toggleTheme() {
-    setState(() {
-      isDarkMode = !isDarkMode;
-    });
+  @override
+  void initState() {
+    super.initState();
+    InternetConnectivityChecker.init();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: WeatherAppBar(
+        onPressed: () {
+          debugPrint(
+              "Internet Connection Status->${InternetConnectivityChecker.hasConnection}");
+        },
+      ),
       backgroundColor: context.theme.appColors.background,
       body: screens[currentIndex],
       extendBody: true,
@@ -40,5 +50,11 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    InternetConnectivityChecker.dispose();
   }
 }

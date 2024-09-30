@@ -1,26 +1,77 @@
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
-class InternetChecker {
-  static final InternetChecker _instance = InternetChecker._internal();
-  static bool _hasConnection = false;
+class InternetConnectivityChecker {
+  static final InternetConnectivityChecker _instance =
+      InternetConnectivityChecker._internal();
+  static bool hasConnection = false;
+  static StreamSubscription<InternetStatus>? subscription;
 
-  InternetChecker._internal() {
-    // Listen to status changes and update the connection status.
-
-    InternetConnectionChecker().onStatusChange.listen(
-      (status) {
-        _hasConnection = status == InternetConnectionStatus.connected;
-      },
-    );
+  InternetConnectivityChecker._internal() {
+    checkInitialConnection();
   }
 
-  factory InternetChecker.init() {
+  factory InternetConnectivityChecker.init() {
     return _instance;
   }
 
-  static Future<bool> checkConnection() async {
-    if (_hasConnection) return _hasConnection;
-    return await Future.delayed(
-        const Duration(milliseconds: 5), () => _hasConnection);
+  checkInitialConnection() async => hasConnection =
+      await InternetConnection().internetStatus == InternetStatus.connected;
+
+  static void startListening({
+    required Function(
+      StreamSubscription<InternetStatus>? subscription,
+    ) initSubscription,
+  }) async {
+    initSubscription(subscription);
+    // Lifecycle management for pausing and resuming the subscription
+    AppLifecycleListener(
+      onResume: () => subscription?.resume(),
+      onHide: () => subscription?.pause(),
+      onPause: () => subscription?.pause(),
+    );
+  }
+
+  static void dispose() {
+    // Cancel subscription when it's no longer needed
+    subscription?.cancel();
+    subscription = null;
+  }
+}
+
+class AppLifecycleListener extends WidgetsBindingObserver {
+  final VoidCallback onResume;
+  final VoidCallback onPause;
+  final VoidCallback onHide;
+
+  AppLifecycleListener({
+    required this.onResume,
+    required this.onPause,
+    required this.onHide,
+  }) {
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        onResume();
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+        onPause();
+        break;
+      case AppLifecycleState.detached:
+        onHide();
+        break;
+      default:
+        break;
+    }
+  }
+
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
   }
 }

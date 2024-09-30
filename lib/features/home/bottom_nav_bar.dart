@@ -21,7 +21,7 @@ class FloatingBottomNavBar extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
       elevation: 4,
-      color: context.theme.appColors.tertiary,
+      color: context.theme.appColors.surface,
       shadowColor: Colors.indigo.shade900,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
       child: SizedBox(
@@ -44,6 +44,14 @@ class FloatingBottomNavBar extends StatelessWidget {
               isActive: currentIndex == 1 ? true : false,
               onTap: () {
                 getCurrentIndex(1);
+              },
+            ),
+            BottomNavItem(
+              title: "Search",
+              icon: FontAwesomeIcons.magnifyingGlass,
+              isActive: currentIndex == 2 ? true : false,
+              onTap: () {
+                getCurrentIndex(2);
               },
             ),
           ],
