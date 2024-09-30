@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:3749539674993228356",
-      "lastPropertyId": "1:6068282980129360363",
+      "lastPropertyId": "15:5607784614202198810",
       "name": "WeatherEntity",
       "properties": [
         {
@@ -13,20 +13,125 @@
           "name": "id",
           "type": 6,
           "flags": 1
+        },
+        {
+          "id": "2:7834538198821526376",
+          "name": "cityName",
+          "type": 9
+        },
+        {
+          "id": "3:4259284133579062549",
+          "name": "countryCode",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:8723998582670484710",
+      "lastPropertyId": "14:2883618737333844335",
+      "name": "WeatherData",
+      "properties": [
+        {
+          "id": "1:1668053435644619245",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6802718753673915078",
+          "name": "maxTemp",
+          "type": 8
+        },
+        {
+          "id": "3:2391820062073948694",
+          "name": "minTemp",
+          "type": 8
+        },
+        {
+          "id": "4:6851390447992425464",
+          "name": "clouds",
+          "type": 6
+        },
+        {
+          "id": "5:7864925719929271126",
+          "name": "datetime",
+          "type": 10
+        },
+        {
+          "id": "6:3896060537421458696",
+          "name": "icon",
+          "type": 9
+        },
+        {
+          "id": "7:4513938759997363301",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "8:1244012710078322929",
+          "name": "code",
+          "type": 6
+        },
+        {
+          "id": "9:6866385751371958406",
+          "name": "sunriseTs",
+          "type": 6
+        },
+        {
+          "id": "10:2832330921444047487",
+          "name": "sunsetTs",
+          "type": 6
+        },
+        {
+          "id": "11:6175267845961213112",
+          "name": "windSpd",
+          "type": 8
+        },
+        {
+          "id": "12:4224706079200669017",
+          "name": "temp",
+          "type": 8
+        },
+        {
+          "id": "13:8785319078580557721",
+          "name": "snow",
+          "type": 6
+        },
+        {
+          "id": "14:2883618737333844335",
+          "name": "weatherId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:2350672389406998621",
+          "relationTarget": "WeatherEntity"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:3749539674993228356",
-  "lastIndexId": "0:0",
+  "lastEntityId": "2:8723998582670484710",
+  "lastIndexId": "1:2350672389406998621",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    7158201071175179883,
+    7144367821096393768,
+    214455206906946095,
+    7925505065643434450,
+    4712366496930286945,
+    3948417208679349473,
+    1765125725341945638,
+    4834781918040698037,
+    2421493447849023494,
+    1784500332728246067,
+    8509481122166373450,
+    5607784614202198810
+  ],
   "retiredRelationUids": [],
   "version": 1
 }
