@@ -1,6 +1,6 @@
 import 'package:weather_tracker/objectbox.g.dart';
-import 'package:weather_tracker/features/remote_weather/domain/entities/weather_data.dart';
-import 'package:weather_tracker/features/remote_weather/domain/entities/weather_entity.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
 
 class WeatherDbBox {
   late final Store store;

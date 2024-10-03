@@ -4,7 +4,7 @@ import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_tracker/core/constants/app_assets.dart';
-import 'package:weather_tracker/features/remote_weather/presentation/views/widgets/current/view_more_btn.dart';
+import 'package:weather_tracker/features/weather/presentation/views/widgets/current/view_more_btn.dart';
 
 class ForecastListItem extends StatelessWidget {
   const ForecastListItem({

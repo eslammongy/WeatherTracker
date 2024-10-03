@@ -1,5 +1,5 @@
 import 'package:objectbox/objectbox.dart';
-import 'package:weather_tracker/features/remote_weather/domain/entities/weather_data.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
 
 @Entity()
 class WeatherEntity {

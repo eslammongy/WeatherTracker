@@ -1,5 +1,5 @@
 import 'package:objectbox/objectbox.dart';
-import 'package:weather_tracker/features/remote_weather/domain/entities/weather_entity.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
 
 @Entity()
 class WeatherData {
@@ -15,7 +15,7 @@ class WeatherData {
   final int? sunriseTs;
   final int? sunsetTs;
   final double? windSpd;
-  final num? temp;
+  final double? temp;
   final int? snow;
 
   final weather = ToOne<WeatherEntity>();
@@ -51,7 +51,7 @@ class WeatherData {
       sunriseTs: map['sunrise_ts'] != null ? map['sunrise_ts'] as int : null,
       sunsetTs: map['sunset_ts'] != null ? map['sunset_ts'] as int : null,
       windSpd: map['wind_spd'] != null ? map['wind_spd'] as double : null,
-      temp: map['temp'] != null ? map['temp'] as num : null,
+      temp: map['temp'] != null ? map['temp'] as double : null,
       snow: map['snow'] != null ? map['snow'] as int : null,
     );
   }

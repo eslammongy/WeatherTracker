@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
 import '../../helpers/test_helper.mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_tracker/features/remote_weather/domain/entities/weather_data.dart';
-import 'package:weather_tracker/features/remote_weather/domain/entities/weather_entity.dart';
-import 'package:weather_tracker/features/remote_weather/domain/usecaces/fetch_city_weather_use_case.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
+import 'package:weather_tracker/features/weather/domain/usecaces/fetch_city_weather_use_case.dart';
 
 void main() {
   late FetchWeatherByCityNameUseCase fetchWeatherByCityNameUseCase;

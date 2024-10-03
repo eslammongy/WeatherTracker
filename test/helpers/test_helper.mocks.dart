@@ -12,9 +12,9 @@ import 'package:http/http.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i9;
 import 'package:weather_tracker/core/error/api_failure.dart' as _i6;
-import 'package:weather_tracker/features/remote_weather/domain/entities/weather_entity.dart'
+import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart'
     as _i7;
-import 'package:weather_tracker/features/remote_weather/domain/repository/weather_repository.dart'
+import 'package:weather_tracker/features/weather/domain/repository/weather_repository.dart'
     as _i4;
 
 // ignore_for_file: type=lint

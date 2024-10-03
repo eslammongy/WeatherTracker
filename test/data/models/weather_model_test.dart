@@ -1,7 +1,7 @@
 import '../../helpers/dummy/dummy_data.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_tracker/features/remote_weather/data/models/weather_model.dart';
-import 'package:weather_tracker/features/remote_weather/domain/entities/weather_data.dart';
+import 'package:weather_tracker/features/weather/data/models/weather_model.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
 
 void main() {
   final testWeather = WeatherModel(
