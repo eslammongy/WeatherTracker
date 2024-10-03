@@ -16,7 +16,7 @@ class WeatherData {
   final int? sunriseTs;
   final int? sunsetTs;
   final double? windSpd;
-  final double? temp;
+  final num? temp;
   final int? snow;
 
   final weather = ToOne<WeatherEntity>();
@@ -42,18 +42,17 @@ class WeatherData {
       maxTemp: map['max_temp'] != null ? map['max_temp'] as double : null,
       minTemp: map['min_temp'] != null ? map['min_temp'] as double : null,
       clouds: map['clouds'] != null ? map['clouds'] as int : null,
-      datetime: map['datetime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['datetime'] as int)
-          : null,
+      datetime:
+          map['datetime'] != null ? DateTime.tryParse(map['datetime']) : null,
       icon: weather['icon'] != null ? weather['icon'] as String : null,
       description: weather['description'] != null
           ? weather['description'] as String
           : null,
       code: weather['code'] != null ? weather['code'] as int : null,
-      sunriseTs: map['sunriseTs'] != null ? map['sunriseTs'] as int : null,
-      sunsetTs: map['sunsetTs'] != null ? map['sunsetTs'] as int : null,
-      windSpd: map['windSpd'] != null ? map['windSpd'] as double : null,
-      temp: map['temp'] != null ? map['temp'] as double : null,
+      sunriseTs: map['sunrise_ts'] != null ? map['sunrise_ts'] as int : null,
+      sunsetTs: map['sunset_ts'] != null ? map['sunset_ts'] as int : null,
+      windSpd: map['wind_spd'] != null ? map['wind_spd'] as double : null,
+      temp: map['temp'] != null ? map['temp'] as num : null,
       snow: map['snow'] != null ? map['snow'] as int : null,
     );
   }
