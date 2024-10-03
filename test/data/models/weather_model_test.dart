@@ -1,6 +1,6 @@
 import '../../helpers/dummy/dummy_data.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_tracker/features/remote_weather/data/models/forecast_model.dart';
+import 'package:weather_tracker/features/remote_weather/data/models/weather_model.dart';
 import 'package:weather_tracker/features/remote_weather/domain/entities/weather_data.dart';
 
 void main() {
@@ -40,7 +40,7 @@ void main() {
     "Test Weather Model Is A Subclass For Weather Entity",
     () {
       // arrange
-      final jsonData = dummyJson;
+      const jsonData = dummyJson;
 
       // act
       final result = WeatherModel.fromJson(jsonData);

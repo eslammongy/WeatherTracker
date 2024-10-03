@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:objectbox/objectbox.dart';
 import 'package:weather_tracker/features/remote_weather/domain/entities/weather_entity.dart';
 
@@ -56,7 +55,38 @@ class WeatherData {
       snow: map['snow'] != null ? map['snow'] as int : null,
     );
   }
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-  factory WeatherData.fromJson(String source) =>
-      WeatherData.fromMap(json.decode(source) as Map<String, dynamic>);
+    return other is WeatherData &&
+        other.maxTemp == maxTemp &&
+        other.minTemp == minTemp &&
+        other.clouds == clouds &&
+        other.datetime == datetime &&
+        other.icon == icon &&
+        other.description == description &&
+        other.code == code &&
+        other.sunriseTs == sunriseTs &&
+        other.sunsetTs == sunsetTs &&
+        other.windSpd == windSpd &&
+        other.temp == temp &&
+        other.snow == snow;
+  }
+
+  @override
+  int get hashCode {
+    return maxTemp.hashCode ^
+        minTemp.hashCode ^
+        clouds.hashCode ^
+        datetime.hashCode ^
+        icon.hashCode ^
+        description.hashCode ^
+        code.hashCode ^
+        sunriseTs.hashCode ^
+        sunsetTs.hashCode ^
+        windSpd.hashCode ^
+        temp.hashCode ^
+        snow.hashCode;
+  }
 }
