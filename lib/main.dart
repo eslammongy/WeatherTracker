@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/features/home/adaptive_home_screen.dart';
 
 Future<void> main() async {

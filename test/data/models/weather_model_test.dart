@@ -30,7 +30,7 @@ void main() {
         code: 202,
         sunriseTs: 1728046498,
         sunsetTs: 1728086612,
-        temp: 19.9,
+        temp: 19,
         windSpd: 0.8,
         datetime: DateTime.tryParse("2024-10-04"),
       ),

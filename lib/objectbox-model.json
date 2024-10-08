@@ -29,7 +29,7 @@
     },
     {
       "id": "2:8723998582670484710",
-      "lastPropertyId": "14:2883618737333844335",
+      "lastPropertyId": "15:7638900566216763639",
       "name": "WeatherData",
       "properties": [
         {
@@ -100,6 +100,11 @@
           "flags": 520,
           "indexId": "1:2350672389406998621",
           "relationTarget": "WeatherEntity"
+        },
+        {
+          "id": "15:7638900566216763639",
+          "name": "temp",
+          "type": 6
         }
       ],
       "relations": []

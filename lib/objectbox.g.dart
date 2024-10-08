@@ -50,7 +50,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(2, 8723998582670484710),
       name: 'WeatherData',
-      lastPropertyId: const obx_int.IdUid(14, 2883618737333844335),
+      lastPropertyId: const obx_int.IdUid(15, 7638900566216763639),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -119,7 +119,12 @@ final _entities = <obx_int.ModelEntity>[
             type: 11,
             flags: 520,
             indexId: const obx_int.IdUid(1, 2350672389406998621),
-            relationTarget: 'WeatherEntity')
+            relationTarget: 'WeatherEntity'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(15, 7638900566216763639),
+            name: 'temp',
+            type: 6,
+            flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[])
@@ -244,7 +249,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final descriptionOffset = object.description == null
               ? null
               : fbb.writeString(object.description!);
-          fbb.startTable(15);
+          fbb.startTable(16);
           fbb.addInt64(0, object.id);
           fbb.addFloat64(1, object.maxTemp);
           fbb.addFloat64(2, object.minTemp);
@@ -258,6 +263,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addFloat64(10, object.windSpd);
           fbb.addInt64(12, object.snow);
           fbb.addInt64(13, object.weather.targetId);
+          fbb.addInt64(14, object.temp);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -288,6 +294,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 22);
           final windSpdParam = const fb.Float64Reader()
               .vTableGetNullable(buffer, rootOffset, 24);
+          final tempParam =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 32);
           final snowParam =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 28);
           final object = WeatherData(
@@ -301,6 +309,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
               sunriseTs: sunriseTsParam,
               sunsetTs: sunsetTsParam,
               windSpd: windSpdParam,
+              temp: tempParam,
               snow: snowParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           object.weather.targetId =
@@ -385,4 +394,8 @@ class WeatherData_ {
   /// See [WeatherData.weather].
   static final weather = obx.QueryRelationToOne<WeatherData, WeatherEntity>(
       _entities[1].properties[12]);
+
+  /// See [WeatherData.temp].
+  static final temp =
+      obx.QueryIntegerProperty<WeatherData>(_entities[1].properties[13]);
 }

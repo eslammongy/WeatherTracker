@@ -1,3 +1,7 @@
+import 'package:weather_tracker/features/weather/data/models/weather_model.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
+
 const dummyJson = {
   "city_name": "Free Union",
   "country_code": "US",
@@ -26,7 +30,69 @@ const dummyJson = {
       "sunrise_ts": 1728046498,
       "sunset_ts": 1728086612,
       "wind_spd": 0.8,
-      "temp": 19.9,
+      "temp": 19,
     },
   ]
 };
+
+final testWeather = WeatherEntity(
+  cityName: "Cairo",
+  countryCode: "EG",
+  weatherData: [
+    WeatherData(
+      maxTemp: 22.0,
+      minTemp: 20.0,
+      description: "Cloudy",
+      icon: "10d",
+      clouds: 11,
+      code: 22,
+      sunriseTs: 4234235,
+      sunsetTs: 5235234,
+      temp: 28,
+      windSpd: 90.9,
+    ),
+    WeatherData(
+      maxTemp: 22.0,
+      minTemp: 20.0,
+      description: "Cloudy",
+      icon: "10d",
+      clouds: 11,
+      code: 22,
+      sunriseTs: 4234235,
+      sunsetTs: 5235234,
+      temp: 28,
+      windSpd: 90.9,
+    ),
+  ],
+);
+
+final testWeatherModel = WeatherModel(
+  cityName: "Cairo",
+  countryCode: "EG",
+  weatherData: [
+    WeatherData(
+      maxTemp: 22.0,
+      minTemp: 20.0,
+      description: "Cloudy",
+      icon: "10d",
+      clouds: 11,
+      code: 22,
+      sunriseTs: 4234235,
+      sunsetTs: 5235234,
+      temp: 28,
+      windSpd: 90.9,
+    ),
+    WeatherData(
+      maxTemp: 22.0,
+      minTemp: 20.0,
+      description: "Cloudy",
+      icon: "10d",
+      clouds: 11,
+      code: 22,
+      sunriseTs: 4234235,
+      sunsetTs: 5235234,
+      temp: 28,
+      windSpd: 90.9,
+    ),
+  ],
+);
