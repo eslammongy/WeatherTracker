@@ -15,4 +15,8 @@ abstract class WeatherRepository {
   Future<Either<Failure, WeatherEntity>> fetchWeatherByCityName({
     required String name,
   });
+  Future<Either<Failure, int>> saveWeatherDataLocally({
+    required WeatherEntity data,
+  });
+  Future<Either<Failure, List<WeatherEntity>>> fetchLocallyWeatherData();
 }

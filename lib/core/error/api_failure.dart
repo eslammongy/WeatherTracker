@@ -100,3 +100,7 @@ class ServerFailure extends Failure {
     return message;
   }
 }
+
+class DBFailure extends Failure {
+  DBFailure({super.message});
+}
