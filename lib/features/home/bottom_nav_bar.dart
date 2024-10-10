@@ -1,7 +1,8 @@
-import 'bottom_nav_bar_item.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:weather_tracker/config/theme/app_theme.dart';
+
+import 'bottom_nav_bar_item.dart';
 
 typedef GetCurrentIndex = void Function(int index);
 
@@ -23,7 +24,7 @@ class FloatingBottomNavBar extends StatelessWidget {
       elevation: 4,
       color: context.theme.appColors.surface,
       shadowColor: Colors.indigo.shade900,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: SizedBox(
         height: 80,
         child: Row(

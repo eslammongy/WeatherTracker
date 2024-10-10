@@ -49,6 +49,9 @@
 		<false/>
 		<key>com.apple.security.network.client</key>
 		<true/>
-
+        <key>com.apple.security.network.server</key>
+        <true/>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>This app needs access to location when open.</string>
 	</dict>
 </plist>
