@@ -42,7 +42,10 @@ class WeatherDetailsWrap extends StatelessWidget {
           title: 'Wind Speed',
           value: '15 km/h',
         ),
-        ViewMoreBtn(),
+        ViewMoreBtn(
+          width: 130,
+          height: 140,
+        ),
       ],
     );
   }

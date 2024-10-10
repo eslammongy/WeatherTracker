@@ -12,6 +12,7 @@ void showAnimatedDialog(
   showGeneralDialog(
     context: context,
     transitionDuration: const Duration(milliseconds: 350),
+    barrierColor: Colors.black.withOpacity(0.8),
     transitionBuilder: (_, anim, __, child) => _dialogAnimation(anim, child),
     pageBuilder: (_, __, ___) {
       return PopScope(
@@ -20,9 +21,6 @@ void showAnimatedDialog(
           backgroundColor: theme.appColors.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            side: BorderSide(
-              color: theme.appColors.primary.withOpacity(0.4),
-            ),
           ),
           elevation: 3,
           insetPadding:
@@ -45,15 +43,18 @@ void showAnimatedDialog(
 
 Row _buildDialogTitle(ThemeData theme, String title, BuildContext context) {
   return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Card(
-        color: theme.appColors.primary,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          child: Text(
-            title,
-            style: AppTextStyles.styleSemiBold20(context),
+      Expanded(
+        child: Card(
+          color: theme.appColors.primary,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: AppTextStyles.styleSemiBold20(context),
+            ),
           ),
         ),
       ),

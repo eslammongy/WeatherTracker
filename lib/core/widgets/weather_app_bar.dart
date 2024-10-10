@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:weather_tracker/config/theme/app_theme.dart';
-import 'package:weather_tracker/config/theme/text_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_tracker/config/theme/app_colors_extension.dart';
+import 'package:weather_tracker/config/theme/app_theme.dart';
+import 'package:weather_tracker/config/theme/text_style.dart';
 
 class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
   const WeatherAppBar({super.key, this.onPressed});
@@ -35,7 +35,7 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
           border: Border.all(width: 2, color: appColors.tertiary),
           borderRadius: const BorderRadius.all(Radius.circular(12))),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -54,7 +54,37 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             Text(
               "last update 12:00",
-              style: AppTextStyles.styleRegular16(context),
+              style: AppTextStyles.styleSemiBold18(context),
+            ),
+            _buildCurrentCityWidget(context)
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCurrentCityWidget(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+      color: theme.appColors.primary,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Icon(
+              FontAwesomeIcons.locationDot,
+              size: 20,
+              color: Colors.white,
+            ), // Weather Icon
+            const SizedBox(
+              width: 5,
+            ),
+            Text(
+              "Cairo, EG",
+              style: AppTextStyles.styleSemiBold24(context)
+                  .copyWith(color: Colors.white),
             ),
           ],
         ),
