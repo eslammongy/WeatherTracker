@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
+import 'package:weather_tracker/core/utils/internet_checker_service.dart';
+import 'package:weather_tracker/core/utils/location_services.dart';
 import 'package:weather_tracker/core/widgets/weather_app_bar.dart';
 import 'package:weather_tracker/features/home/bottom_nav_bar.dart';
-import 'package:weather_tracker/core/utils/internet_checker_service.dart';
-import 'package:weather_tracker/features/weather/presentation/views/screens/forecast_screen.dart';
 import 'package:weather_tracker/features/weather/presentation/views/screens/current_weather_screen.dart';
+import 'package:weather_tracker/features/weather/presentation/views/screens/forecast_screen.dart';
 import 'package:weather_tracker/features/weather/presentation/views/screens/search_for_city_screen.dart';
 
 class SmallHomeScreen extends StatefulWidget {
@@ -33,9 +34,18 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: WeatherAppBar(
-        onPressed: () {
-          debugPrint(
-              "Internet Connection Status->${InternetConnectivityChecker.hasConnection}");
+        onPressed: () async {
+          final isEnabled = await LocationServices.checkLocationService();
+          debugPrint("Location Services Is:: $isEnabled");
+          if (!isEnabled) {
+            LocationServices.checkLocationPermission();
+            debugPrint(
+                "Location Coordinates:: ${LocationServices.lat} ${LocationServices.lon}");
+          } else {
+            LocationServices.checkLocationPermission();
+            debugPrint(
+                "Location Coordinates:: ${LocationServices.lat} ${LocationServices.lon}");
+          }
         },
       ),
       backgroundColor: context.theme.appColors.background,

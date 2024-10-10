@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 abstract class LocationServices {
@@ -7,18 +8,25 @@ abstract class LocationServices {
   static Future<bool> checkLocationService() async =>
       await Geolocator.isLocationServiceEnabled();
 
-  static Future<bool> checkLocationPermission() async {
+  static Future<void> checkLocationPermission() async {
     LocationPermission locationPermission = await Geolocator.checkPermission();
-    if (locationPermission == LocationPermission.denied) {
-      // should ask for permission
-      locationPermission = await Geolocator.requestPermission();
-      return locationPermission != LocationPermission.denied;
+
+    if (locationPermission != LocationPermission.denied) {
+      _getCurrentPosition();
     } else {
-      return true;
+      // should ask for permission
+      await Geolocator.requestPermission().then((value) {
+        debugPrint("Location Permission:: $value");
+        if (value != LocationPermission.denied) {
+          debugPrint(
+              "Location Coordinates:: ${LocationServices.lat} ${LocationServices.lon}");
+          _getCurrentPosition();
+        }
+      });
     }
   }
 
-  static Future<void> getCurrentPosition() async {
+  static Future<void> _getCurrentPosition() async {
     final position = await Geolocator.getCurrentPosition();
     lat = position.latitude;
     lon = position.longitude;
