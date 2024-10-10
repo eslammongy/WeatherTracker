@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 import 'package:weather_tracker/core/constants/app_assets.dart';
-import 'package:weather_tracker/features/weather/presentation/views/widgets/current/view_more_btn.dart';
 
 class ForecastListItem extends StatelessWidget {
   const ForecastListItem({
@@ -31,16 +30,6 @@ class ForecastListItem extends StatelessWidget {
                 AppAssets.thunderstorm2,
                 fit: BoxFit.contain,
                 width: 120,
-              ),
-            ),
-            const Positioned(
-              top: 10,
-              left: 0,
-              right: 0,
-              child: ViewMoreBtn(
-                height: 40,
-                width: 40,
-                isForecastOpened: true,
               ),
             ),
             Positioned(

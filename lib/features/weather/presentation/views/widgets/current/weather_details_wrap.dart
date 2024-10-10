@@ -10,7 +10,7 @@ class WeatherDetailsWrap extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Wrap(
       direction: Axis.horizontal,
-      spacing: 8.0,
+      spacing: 10,
       runSpacing: 10,
       children: [
         // Sunrise Info
@@ -43,8 +43,8 @@ class WeatherDetailsWrap extends StatelessWidget {
           value: '15 km/h',
         ),
         ViewMoreBtn(
-          width: 130,
-          height: 140,
+          width: 125,
+          height: 125,
         ),
       ],
     );

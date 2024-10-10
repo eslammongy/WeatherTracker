@@ -26,16 +26,21 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  DecoratedBox _buildTitleWidget(AppColorEx appColors, BuildContext context) {
+  Widget _buildTitleWidget(AppColorEx appColors, BuildContext context) {
     var boxDecoration = BoxDecoration(
         border: Border.all(width: 2, color: appColors.tertiary),
         borderRadius: const BorderRadius.all(Radius.circular(100)));
+    return _buildLastUpdated(appColors, boxDecoration, context);
+  }
+
+  DecoratedBox _buildLastUpdated(
+      AppColorEx appColors, BoxDecoration boxDecoration, BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-          border: Border.all(width: 2, color: appColors.tertiary),
+          border: Border.all(width: 2, color: appColors.primary),
           borderRadius: const BorderRadius.all(Radius.circular(12))),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+        padding: const EdgeInsets.only(left: 10),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -56,7 +61,10 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
               "last update 12:00",
               style: AppTextStyles.styleSemiBold18(context),
             ),
-            _buildCurrentCityWidget(context)
+            const SizedBox(
+              width: 10,
+            ),
+            SizedBox(width: 100, child: _buildCurrentCityWidget(context))
           ],
         ),
       ),
@@ -67,24 +75,29 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
     final theme = Theme.of(context);
     return Card(
       color: theme.appColors.primary,
+      margin: EdgeInsets.zero,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             const Icon(
               FontAwesomeIcons.locationDot,
-              size: 20,
+              size: 16,
               color: Colors.white,
             ), // Weather Icon
             const SizedBox(
               width: 5,
             ),
-            Text(
-              "Cairo, EG",
-              style: AppTextStyles.styleSemiBold24(context)
-                  .copyWith(color: Colors.white),
+            Expanded(
+              child: Text(
+                "Cairo, EG",
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.styleMedium16(context)
+                    .copyWith(color: Colors.white),
+              ),
             ),
           ],
         ),

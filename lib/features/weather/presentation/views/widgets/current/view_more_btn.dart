@@ -17,7 +17,13 @@ class ViewMoreBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildSizedBoxBtn(context);
+    return SizedBox(
+        height: width,
+        width: height,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+          child: buildSizedBoxBtn(context),
+        ));
   }
 
   Widget buildSizedBoxBtn(BuildContext context, {Function()? onTap}) {
@@ -30,17 +36,14 @@ class ViewMoreBtn extends StatelessWidget {
           body: _buildMoreWeatherInfoGrid(),
         );
       },
-      child: Container(
-        width: 60,
-        height: 60,
-        alignment: Alignment.center,
+      child: DecoratedBox(
         decoration: isForecastOpened
             ? BoxDecoration(
                 color: Colors.green, borderRadius: BorderRadius.circular(100))
             : pubBoxDecoration,
         child: Icon(
             isForecastOpened ? FontAwesomeIcons.ellipsis : Icons.arrow_forward,
-            size: 20,
+            size: 28,
             color: Colors.white),
       ),
     );
