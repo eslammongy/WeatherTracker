@@ -1,8 +1,7 @@
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_tracker/core/constants/app_assets.dart';
 import 'package:weather_tracker/features/weather/presentation/views/widgets/current/view_more_btn.dart';
 
@@ -25,11 +24,14 @@ class ForecastListItem extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            const Positioned(
+            Positioned(
               right: 45,
               top: 0,
-              child:
-                  Icon(FontAwesomeIcons.cloud, size: 110, color: Colors.white),
+              child: SvgPicture.asset(
+                AppAssets.thunderstorm2,
+                fit: BoxFit.contain,
+                width: 120,
+              ),
             ),
             const Positioned(
               top: 10,

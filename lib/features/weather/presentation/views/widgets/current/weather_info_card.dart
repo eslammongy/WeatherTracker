@@ -18,7 +18,7 @@ class WeatherInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 120,
+      width: 130,
       height: 140,
       child: Card(
         color: context.theme.appColors.surface,

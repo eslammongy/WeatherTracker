@@ -4,7 +4,7 @@ import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 
 const pubBoxDecoration = BoxDecoration(
-  borderRadius: BorderRadius.all(Radius.circular(16)),
+  borderRadius: BorderRadius.all(Radius.circular(100)),
   gradient: LinearGradient(
     colors: [
       Color(0xFF5F20F1),
