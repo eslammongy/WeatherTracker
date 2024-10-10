@@ -14,8 +14,8 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'features/remote_weather/domain/entities/weather_data.dart';
-import 'features/remote_weather/domain/entities/weather_entity.dart';
+import 'features/weather/domain/entities/weather_data.dart';
+import 'features/weather/domain/entities/weather_entity.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -50,7 +50,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(2, 8723998582670484710),
       name: 'WeatherData',
-      lastPropertyId: const obx_int.IdUid(14, 2883618737333844335),
+      lastPropertyId: const obx_int.IdUid(15, 7638900566216763639),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -109,11 +109,6 @@ final _entities = <obx_int.ModelEntity>[
             type: 8,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(12, 4224706079200669017),
-            name: 'temp',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
             id: const obx_int.IdUid(13, 8785319078580557721),
             name: 'snow',
             type: 6,
@@ -124,7 +119,12 @@ final _entities = <obx_int.ModelEntity>[
             type: 11,
             flags: 520,
             indexId: const obx_int.IdUid(1, 2350672389406998621),
-            relationTarget: 'WeatherEntity')
+            relationTarget: 'WeatherEntity'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(15, 7638900566216763639),
+            name: 'temp',
+            type: 6,
+            flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[])
@@ -183,7 +183,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
         2421493447849023494,
         1784500332728246067,
         8509481122166373450,
-        5607784614202198810
+        5607784614202198810,
+        4224706079200669017
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -248,7 +249,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final descriptionOffset = object.description == null
               ? null
               : fbb.writeString(object.description!);
-          fbb.startTable(15);
+          fbb.startTable(16);
           fbb.addInt64(0, object.id);
           fbb.addFloat64(1, object.maxTemp);
           fbb.addFloat64(2, object.minTemp);
@@ -260,9 +261,9 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addInt64(8, object.sunriseTs);
           fbb.addInt64(9, object.sunsetTs);
           fbb.addFloat64(10, object.windSpd);
-          fbb.addFloat64(11, object.temp);
           fbb.addInt64(12, object.snow);
           fbb.addInt64(13, object.weather.targetId);
+          fbb.addInt64(14, object.temp);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -293,8 +294,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 22);
           final windSpdParam = const fb.Float64Reader()
               .vTableGetNullable(buffer, rootOffset, 24);
-          final tempParam = const fb.Float64Reader()
-              .vTableGetNullable(buffer, rootOffset, 26);
+          final tempParam =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 32);
           final snowParam =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 28);
           final object = WeatherData(
@@ -386,15 +387,15 @@ class WeatherData_ {
   static final windSpd =
       obx.QueryDoubleProperty<WeatherData>(_entities[1].properties[10]);
 
-  /// See [WeatherData.temp].
-  static final temp =
-      obx.QueryDoubleProperty<WeatherData>(_entities[1].properties[11]);
-
   /// See [WeatherData.snow].
   static final snow =
-      obx.QueryIntegerProperty<WeatherData>(_entities[1].properties[12]);
+      obx.QueryIntegerProperty<WeatherData>(_entities[1].properties[11]);
 
   /// See [WeatherData.weather].
   static final weather = obx.QueryRelationToOne<WeatherData, WeatherEntity>(
-      _entities[1].properties[13]);
+      _entities[1].properties[12]);
+
+  /// See [WeatherData.temp].
+  static final temp =
+      obx.QueryIntegerProperty<WeatherData>(_entities[1].properties[13]);
 }

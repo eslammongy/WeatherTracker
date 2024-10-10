@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:weather_tracker/core/error/api_error_msg.dart';
 
 abstract class Failure {
-  final DioExceptionType exceptionType;
+  final DioExceptionType? exceptionType;
   final int? statusCode;
   final String? message;
   const Failure({
-    required this.exceptionType,
+    this.exceptionType,
     this.statusCode,
     this.message,
   });
@@ -14,7 +14,7 @@ abstract class Failure {
 
 class ServerFailure extends Failure {
   ServerFailure({
-    required super.exceptionType,
+    super.exceptionType,
     super.statusCode,
     super.message,
   });
@@ -99,4 +99,8 @@ class ServerFailure extends Failure {
     }
     return message;
   }
+}
+
+class DBFailure extends Failure {
+  DBFailure({super.message});
 }

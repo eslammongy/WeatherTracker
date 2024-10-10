@@ -3,29 +3,29 @@ import 'package:mockito/mockito.dart';
 import '../../helpers/dummy/dummy_data.dart';
 import '../../helpers/test_helper.mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_tracker/features/weather/domain/usecaces/fetch_current_weather_use_case.dart';
+import 'package:weather_tracker/features/weather/domain/usecaces/fetch_city_weather_use_case.dart';
 
 void main() {
-  late FetchCurrentWeatherUseCase fetchCurrentWeatherUseCase;
+  late FetchWeatherByCityNameUseCase fetchWeatherByCityNameUseCase;
   late MockWeatherRepository mockWeatherRepository;
 
   setUp(() {
     mockWeatherRepository = MockWeatherRepository();
-    fetchCurrentWeatherUseCase = FetchCurrentWeatherUseCase(
+    fetchWeatherByCityNameUseCase = FetchWeatherByCityNameUseCase(
       weatherRepository: mockWeatherRepository,
     );
   });
 
-  test("Test for the fetch current weather use case", () async {
+ 
+  test("Test for the fetch current weather by city name use case", () async {
     // Arrange
-    const lat = 9090.0;
-    const lon = 3333.0;
+    const cityName = "Cairo";
 
-    when(mockWeatherRepository.fetchCurrentWeatherInfo(lat: lat, lon: lon))
+    when(mockWeatherRepository.fetchWeatherByCityName(name: cityName))
         .thenAnswer((_) async => Right(testWeather));
 
     // Act
-    final result = await fetchCurrentWeatherUseCase.execute(lat: lat, lon: lon);
+    final result = await fetchWeatherByCityNameUseCase.execute(name: cityName);
 
     // Assert
     expect(result, Right(testWeather));
