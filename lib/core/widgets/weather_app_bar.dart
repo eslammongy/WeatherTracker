@@ -58,7 +58,7 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
               width: 10,
             ),
             Text(
-              "last update 12:00",
+              "last update 00:00",
               style: AppTextStyles.styleSemiBold18(context),
             ),
             const SizedBox(
@@ -93,7 +93,7 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             Expanded(
               child: Text(
-                "Cairo, EG",
+                "City, EG",
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.styleMedium16(context)
                     .copyWith(color: Colors.white),

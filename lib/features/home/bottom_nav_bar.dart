@@ -24,7 +24,7 @@ class FloatingBottomNavBar extends StatelessWidget {
       elevation: 4,
       color: context.theme.appColors.surface,
       shadowColor: Colors.indigo.shade900,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: SizedBox(
         height: 80,
         child: Row(

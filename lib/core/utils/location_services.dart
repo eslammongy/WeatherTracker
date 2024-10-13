@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 abstract class LocationServices {
-  static double lat = 0.0;
-  static double lon = 0.0;
+  static double? lat;
+  static double? lon;
   static void Function()? onDenied;
+  static void Function(double lat, double lon)? callback;
+
   static Future<void> initLocationServices() async {
     final isEnabled = await LocationServices.checkLocationService();
     debugPrint("Location Services Is:: $isEnabled");
@@ -48,6 +50,7 @@ abstract class LocationServices {
     final position = await Geolocator.getCurrentPosition();
     lat = position.latitude;
     lon = position.longitude;
+    if (callback != null) callback!(lat!, lon!);
     debugPrint(
         "Location Coordinates:: ${LocationServices.lat} ${LocationServices.lon}");
   }

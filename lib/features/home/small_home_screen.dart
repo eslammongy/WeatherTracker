@@ -4,6 +4,8 @@ import 'package:weather_tracker/core/utils/internet_checker_service.dart';
 import 'package:weather_tracker/core/utils/location_services.dart';
 import 'package:weather_tracker/core/widgets/weather_app_bar.dart';
 import 'package:weather_tracker/features/home/bottom_nav_bar.dart';
+import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_bloc.dart';
+import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_events.dart';
 import 'package:weather_tracker/features/weather/presentation/views/screens/current_weather_screen.dart';
 import 'package:weather_tracker/features/weather/presentation/views/screens/forecast_screen.dart';
 import 'package:weather_tracker/features/weather/presentation/views/screens/search_for_city_screen.dart';
@@ -29,8 +31,7 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
   void initState() {
     super.initState();
     InternetConnectivityChecker.init();
-    setLocationServicesOnDenied();
-    LocationServices.initLocationServices();
+    setLocationServices(context);
   }
 
   @override
@@ -55,9 +56,13 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
     );
   }
 
-  setLocationServicesOnDenied() {
-    LocationServices.onDenied = () {
-      showLocationRequestDialog(context);
+  setLocationServices(BuildContext context) async {
+    LocationServices.onDenied = () => showLocationRequestDialog(context);
+    await LocationServices.initLocationServices();
+    LocationServices.callback = (lat, lon) {
+      WeatherRemoteBloc.get(context).add(
+        FetchCurrentWeatherEvent(lat: lat, lon: lon),
+      );
     };
   }
 
