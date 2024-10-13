@@ -12,7 +12,7 @@ class WeatherRemoteBloc extends Bloc<WeatherRemoteEvents, WeatherRemoteStates> {
   static WeatherRemoteBloc get(context) => BlocProvider.of(context);
   WeatherRemoteBloc({
     required this.fetchForecastWeatherUseCase,
-  }) : super(WeatherRemoteInitial()) {
+  }) : super(WeatherRemoteInitialState()) {
     on<FetchCurrentWeatherEvent>(onFetchCurrentWeatherData);
   }
 
@@ -20,7 +20,7 @@ class WeatherRemoteBloc extends Bloc<WeatherRemoteEvents, WeatherRemoteStates> {
     FetchCurrentWeatherEvent event,
     Emitter<WeatherRemoteStates> emit,
   ) async {
-    emit(WeatherRemoteLoading());
+    emit(WeatherRemoteLoadingState());
     debugPrint("Result::${event.lat}");
     final result = await fetchForecastWeatherUseCase.execute(
       lat: event.lat,
@@ -28,10 +28,10 @@ class WeatherRemoteBloc extends Bloc<WeatherRemoteEvents, WeatherRemoteStates> {
     );
     result.fold((failure) {
       debugPrint("Request Failure::$failure");
-      emit(WeatherRemoteFailure(message: failure.message!));
+      emit(WeatherRemoteFailureState(failure: failure));
     }, (data) {
       debugPrint("Request Success::${data.cityName}");
-      emit(WeatherRemoteFetchSuccess(weatherEntity: data));
+      emit(WeatherRemoteFetchSuccessState(weatherEntity: data));
     });
   }
 }

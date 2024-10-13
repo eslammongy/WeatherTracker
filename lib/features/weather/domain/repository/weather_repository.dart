@@ -8,15 +8,18 @@ abstract class WeatherRepository {
     required double lon,
   });
 
-  Future<Either<Failure, WeatherEntity>> fetchForecastWeatherInfo({
+  Future<Either<ServerFailure, WeatherEntity>> fetchForecastWeatherInfo({
     required double lat,
     required double lon,
   });
+
   Future<Either<Failure, WeatherEntity>> fetchWeatherByCityName({
     required String name,
   });
+
   Future<Either<Failure, int>> saveWeatherDataLocally({
     required WeatherEntity data,
   });
+
   Future<Either<Failure, List<WeatherEntity>>> fetchLocallyWeatherData();
 }

@@ -19,4 +19,8 @@ abstract class AppAssets {
   static const String thunderstorm1 = 'assets/svg/thunderstorm1.svg';
   static const String thunderstorm2 = 'assets/svg/thunderstorm2.svg';
   static const String thunderstorm3 = 'assets/svg/thunderstorm3.svg';
+  static const String responseErrorImg = 'assets/images/response_error_img.png';
+  static const String noConnectionErrorImg =
+      'assets/images/no_connection_error_img.png';
+  static const String animatedLoading = 'assets/images/animated_loading.json';
 }

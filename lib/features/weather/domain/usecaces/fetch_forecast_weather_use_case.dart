@@ -7,7 +7,7 @@ class FetchForecastWeatherUseCase {
   final WeatherRepository weatherRepository;
 
   FetchForecastWeatherUseCase({required this.weatherRepository});
-  Future<Either<Failure, WeatherEntity>> execute({
+  Future<Either<ServerFailure, WeatherEntity>> execute({
     required double lat,
     required double lon,
   }) {
