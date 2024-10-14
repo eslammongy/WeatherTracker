@@ -216,34 +216,35 @@ class MockWeatherRepository extends _i1.Mock implements _i6.WeatherRepository {
           ) as _i8.Future<_i2.Either<_i9.Failure, _i10.WeatherEntity>>);
 
   @override
-  _i8.Future<_i2.Either<_i9.Failure, _i10.WeatherEntity>>
-      fetchForecastWeatherInfo({
+  _i8.Future<
+      _i2
+      .Either<_i9.ServerFailure, _i10.WeatherEntity>> fetchForecastWeatherInfo({
     required double? lat,
     required double? lon,
   }) =>
-          (super.noSuchMethod(
-            Invocation.method(
-              #fetchForecastWeatherInfo,
-              [],
-              {
-                #lat: lat,
-                #lon: lon,
-              },
-            ),
-            returnValue:
-                _i8.Future<_i2.Either<_i9.Failure, _i10.WeatherEntity>>.value(
-                    _FakeEither_0<_i9.Failure, _i10.WeatherEntity>(
-              this,
-              Invocation.method(
-                #fetchForecastWeatherInfo,
-                [],
-                {
-                  #lat: lat,
-                  #lon: lon,
-                },
-              ),
-            )),
-          ) as _i8.Future<_i2.Either<_i9.Failure, _i10.WeatherEntity>>);
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchForecastWeatherInfo,
+          [],
+          {
+            #lat: lat,
+            #lon: lon,
+          },
+        ),
+        returnValue:
+            _i8.Future<_i2.Either<_i9.ServerFailure, _i10.WeatherEntity>>.value(
+                _FakeEither_0<_i9.ServerFailure, _i10.WeatherEntity>(
+          this,
+          Invocation.method(
+            #fetchForecastWeatherInfo,
+            [],
+            {
+              #lat: lat,
+              #lon: lon,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.ServerFailure, _i10.WeatherEntity>>);
 
   @override
   _i8.Future<_i2.Either<_i9.Failure, _i10.WeatherEntity>>
@@ -1226,7 +1227,7 @@ class MockFetchForecastWeatherUseCase extends _i1.Mock
       ) as _i6.WeatherRepository);
 
   @override
-  _i8.Future<_i2.Either<_i9.Failure, _i10.WeatherEntity>> execute({
+  _i8.Future<_i2.Either<_i9.ServerFailure, _i10.WeatherEntity>> execute({
     required double? lat,
     required double? lon,
   }) =>
@@ -1240,8 +1241,8 @@ class MockFetchForecastWeatherUseCase extends _i1.Mock
           },
         ),
         returnValue:
-            _i8.Future<_i2.Either<_i9.Failure, _i10.WeatherEntity>>.value(
-                _FakeEither_0<_i9.Failure, _i10.WeatherEntity>(
+            _i8.Future<_i2.Either<_i9.ServerFailure, _i10.WeatherEntity>>.value(
+                _FakeEither_0<_i9.ServerFailure, _i10.WeatherEntity>(
           this,
           Invocation.method(
             #execute,
@@ -1252,7 +1253,7 @@ class MockFetchForecastWeatherUseCase extends _i1.Mock
             },
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i9.Failure, _i10.WeatherEntity>>);
+      ) as _i8.Future<_i2.Either<_i9.ServerFailure, _i10.WeatherEntity>>);
 }
 
 /// A class which mocks [Client].

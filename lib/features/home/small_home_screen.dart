@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
+import 'package:weather_tracker/core/utils/internet_checker_service.dart';
+import 'package:weather_tracker/core/utils/location_services.dart';
 import 'package:weather_tracker/core/widgets/weather_app_bar.dart';
 import 'package:weather_tracker/features/home/bottom_nav_bar.dart';
-import 'package:weather_tracker/core/utils/internet_checker_service.dart';
-import 'package:weather_tracker/features/weather/presentation/views/screens/forecast_screen.dart';
+import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_bloc.dart';
+import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_events.dart';
 import 'package:weather_tracker/features/weather/presentation/views/screens/current_weather_screen.dart';
+import 'package:weather_tracker/features/weather/presentation/views/screens/forecast_screen.dart';
 import 'package:weather_tracker/features/weather/presentation/views/screens/search_for_city_screen.dart';
+import 'package:weather_tracker/features/weather/presentation/views/widgets/location_request_dialog.dart';
 
 class SmallHomeScreen extends StatefulWidget {
   const SmallHomeScreen({super.key});
@@ -27,15 +31,15 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
   void initState() {
     super.initState();
     InternetConnectivityChecker.init();
+    setLocationServices(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: WeatherAppBar(
-        onPressed: () {
-          debugPrint(
-              "Internet Connection Status->${InternetConnectivityChecker.hasConnection}");
+        onPressed: () async {
+          showLocationRequestDialog(context);
         },
       ),
       backgroundColor: context.theme.appColors.background,
@@ -50,6 +54,16 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
         },
       ),
     );
+  }
+
+  setLocationServices(BuildContext context) async {
+    LocationServices.onDenied = () => showLocationRequestDialog(context);
+    await LocationServices.initLocationServices();
+    LocationServices.callback = (lat, lon) {
+      WeatherRemoteBloc.get(context).add(
+        FetchCurrentWeatherEvent(lat: lat, lon: lon),
+      );
+    };
   }
 
   @override
