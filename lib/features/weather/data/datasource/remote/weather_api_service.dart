@@ -40,7 +40,7 @@ class WeatherApiServices {
     required double lon,
   }) async {
     final url =
-        "$baseUrl${forecastEndPoint}daily?lat=$lat&lon=$lon&key=$appKey&days=7";
+        "$baseUrl${forecastEndPoint}daily?lat=$lat&lon=$lon&key=$appKey&days=12";
 
     try {
       final response = await client.get(url);

@@ -103,3 +103,10 @@ String extractTime(int? time) {
   final datetime = DateTime.fromMicrosecondsSinceEpoch(time);
   return DateFormat('h:mm a').format(datetime);
 }
+
+String extractDateTime(DateTime? dateTime) {
+  if (dateTime == null) {
+    return "";
+  }
+  return DateFormat.yMMMMEEEEd().format(dateTime);
+}

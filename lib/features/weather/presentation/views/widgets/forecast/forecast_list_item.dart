@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 import 'package:weather_tracker/core/constants/app_assets.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
 
 class ForecastListItem extends StatelessWidget {
   const ForecastListItem({
     super.key,
+    required this.weatherData,
   });
+
+  final WeatherData weatherData;
 
   @override
   Widget build(BuildContext context) {
@@ -46,25 +51,26 @@ class ForecastListItem extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          "24°C",
+                          "${weatherData.temp}°",
                           style: AppTextStyles.styleBold52(context)
                               .copyWith(color: Colors.white),
                         ),
                       ),
                       Text(
-                        "H24°C L24°C",
+                        "H${weatherData.maxTemp}°C L${weatherData.minTemp}°C",
                         style: AppTextStyles.styleRegular16(context)
                             .copyWith(color: context.theme.appColors.tertiary),
                       ),
                       Text(
-                        "Rain Cloudy",
-                        style: AppTextStyles.styleSemiBold18(context)
+                        DateFormat('MMMM d, yyyy')
+                            .format(weatherData.datetime ?? DateTime.now()),
+                        style: AppTextStyles.styleRegular16(context)
                             .copyWith(color: Colors.white),
                       ),
                     ],
                   ),
                   Text(
-                    "Rain Cloudy",
+                    weatherData.description ?? '',
                     style: AppTextStyles.styleSemiBold30(context)
                         .copyWith(color: Colors.white),
                   ),

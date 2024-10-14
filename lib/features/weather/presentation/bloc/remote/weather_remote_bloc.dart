@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
 import 'package:weather_tracker/features/weather/domain/usecaces/fetch_city_weather_use_case.dart';
 import 'package:weather_tracker/features/weather/domain/usecaces/fetch_current_weather_use_case.dart';
 import 'package:weather_tracker/features/weather/domain/usecaces/fetch_forecast_weather_use_case.dart';
@@ -10,6 +11,8 @@ class WeatherRemoteBloc extends Bloc<WeatherRemoteEvents, WeatherRemoteStates> {
   final FetchForecastWeatherUseCase fetchForecastWeather;
   final FetchHourlyWeatherUseCase fetchHourlyWeather;
   final FetchWeatherByCityNameUseCase fetchWeatherByCityName;
+  final List<WeatherData> forecastList = [];
+
   static WeatherRemoteBloc get(context) => BlocProvider.of(context);
   WeatherRemoteBloc({
     required this.fetchForecastWeather,
@@ -49,10 +52,9 @@ class WeatherRemoteBloc extends Bloc<WeatherRemoteEvents, WeatherRemoteStates> {
       lon: event.lon,
     );
     result.fold((failure) {
-      debugPrint("Request Failure::$failure");
       emit(WeatherRemoteFailureState(failure: failure));
     }, (data) {
-      debugPrint("Request Success::${data.cityName}");
+      forecastList.addAll(data.weatherData!);
       emit(WeatherRemoteFetchSuccessState(weatherEntity: data));
     });
   }

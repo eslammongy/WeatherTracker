@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
+import 'package:weather_tracker/core/utils/helper.dart';
 import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
 
 import 'current_weather_container.dart';
@@ -21,7 +21,7 @@ class CurrentWeatherInfo extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           CurrentWeatherContainer(
-            dateTime: _extractDateTime(currentDay.datetime),
+            dateTime: extractDateTime(currentDay.datetime),
             code: "${currentDay.code}",
             temp: currentDay.temp ?? 0,
             description: currentDay.description ?? "Sunny",
@@ -44,12 +44,5 @@ class CurrentWeatherInfo extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _extractDateTime(DateTime? dateTime) {
-    if (dateTime == null) {
-      return "";
-    }
-    return DateFormat.yMMMMEEEEd().format(dateTime);
   }
 }

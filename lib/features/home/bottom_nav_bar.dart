@@ -41,7 +41,7 @@ class FloatingBottomNavBar extends StatelessWidget {
             ),
             BottomNavItem(
               title: "Forecast",
-              icon: FontAwesomeIcons.snowflake,
+              icon: Icons.thermostat_auto_rounded,
               isActive: currentIndex == 1 ? true : false,
               onTap: () {
                 getCurrentIndex(1);

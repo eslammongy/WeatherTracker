@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_tracker/config/theme/app_colors_extension.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
+import 'package:weather_tracker/core/utils/helper.dart';
 import 'package:weather_tracker/core/utils/internet_checker_service.dart';
+import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_bloc.dart';
+import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_states.dart';
 
 import 'current_location_city.dart';
 
@@ -56,34 +60,46 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
             borderRadius: const BorderRadius.all(Radius.circular(12))),
         child: Padding(
           padding: const EdgeInsets.only(left: 10),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              DecoratedBox(
-                decoration: boxDecoration(appColors),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Icon(
-                    Icons.circle,
-                    size: 18,
-                    color: InternetConnectivityChecker.hasConnection
-                        ? Colors.green
-                        : Colors.grey,
+          child: BlocBuilder<WeatherRemoteBloc, WeatherRemoteStates>(
+            builder: (context, state) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  DecoratedBox(
+                    decoration: boxDecoration(appColors),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Icon(
+                        Icons.circle,
+                        size: 18,
+                        color: InternetConnectivityChecker.hasConnection
+                            ? Colors.green
+                            : Colors.grey,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(
-                "last update 00:00",
-                style: AppTextStyles.styleSemiBold18(context),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              SizedBox(width: width * 0.4, child: const CurrentLocationCity())
-            ],
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  state is WeatherRemoteFetchSuccessState
+                      ? Text(
+                          "last update ${extractTime(DateTime.now().microsecondsSinceEpoch)}",
+                          style: AppTextStyles.styleSemiBold18(context),
+                        )
+                      : const SizedBox(),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  SizedBox(
+                      width: width * 0.4,
+                      child: CurrentLocationCity(
+                        weather: state is WeatherRemoteFetchSuccessState
+                            ? state.weatherEntity
+                            : null,
+                      ))
+                ],
+              );
+            },
           ),
         ),
       ),
