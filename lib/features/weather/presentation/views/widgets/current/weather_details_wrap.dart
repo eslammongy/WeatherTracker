@@ -1,50 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:weather_tracker/core/constants/app_assets.dart';
+import 'package:weather_tracker/core/utils/helper.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
 import 'package:weather_tracker/features/weather/presentation/views/widgets/current/view_more_btn.dart';
 import 'package:weather_tracker/features/weather/presentation/views/widgets/current/weather_info_card.dart';
 
 class WeatherDetailsWrap extends StatelessWidget {
-  const WeatherDetailsWrap({super.key});
+  const WeatherDetailsWrap({super.key, required this.weatherData});
+  final WeatherData weatherData;
 
   @override
   Widget build(BuildContext context) {
-    return const Wrap(
+    return Wrap(
       direction: Axis.horizontal,
       spacing: 10,
       runSpacing: 10,
       children: [
         // Sunrise Info
         WeatherInfoCard(
-          icon: FontAwesomeIcons.solidSun,
+          iconPath: AppAssets.sunriseIcon,
           title: 'Sunrise',
-          value: '06:00 AM',
+          value: extractTime(weatherData.sunriseTs),
+        ),
+        WeatherInfoCard(
+          iconPath: AppAssets.sunsetIcon,
+          title: 'Sunset',
+          value: extractTime(weatherData.sunsetTs),
         ),
         // Wind Speed Info
         WeatherInfoCard(
-          icon: FontAwesomeIcons.wind,
+          iconPath: AppAssets.windSpeed,
           title: 'Wind Speed',
-          value: '15 km/h',
-        ),
-        // Sunset Info
-        WeatherInfoCard(
-          icon: FontAwesomeIcons.solidMoon,
-          title: 'Sunset',
-          value: '06:45 PM',
+          value: '${weatherData.windSpd} km/h',
         ),
         // Humidity Info
         WeatherInfoCard(
-          icon: FontAwesomeIcons.droplet,
+          iconPath: AppAssets.humidity,
           title: 'Humidity',
-          value: '65%',
+          value: '${weatherData.humidity} %',
         ),
         WeatherInfoCard(
-          icon: FontAwesomeIcons.wind,
-          title: 'Wind Speed',
-          value: '15 km/h',
+          iconPath: AppAssets.cloudIcon,
+          title: 'Clouds',
+          value: '${weatherData.clouds} km/h',
         ),
         ViewMoreBtn(
           width: 125,
           height: 125,
+          weatherData: weatherData,
         ),
       ],
     );

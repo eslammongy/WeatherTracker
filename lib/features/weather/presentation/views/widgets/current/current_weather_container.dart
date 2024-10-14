@@ -6,7 +6,15 @@ import 'package:weather_tracker/core/constants/app_assets.dart';
 class CurrentWeatherContainer extends StatelessWidget {
   const CurrentWeatherContainer({
     super.key,
+    required this.dateTime,
+    required this.description,
+    required this.temp,
+    required this.code,
   });
+  final String dateTime;
+  final String description;
+  final int temp;
+  final String code;
 
   @override
   Widget build(BuildContext context) {
@@ -17,21 +25,7 @@ class CurrentWeatherContainer extends StatelessWidget {
           width: double.maxFinite,
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                SvgPicture.asset(
-                  AppAssets.thunderstorm2,
-                  width: 200,
-                ), // Weather Icon
-
-                const SizedBox(height: 5),
-                _buildTempWidget(context),
-                Text(
-                  'Sept 17, 2024',
-                  style: AppTextStyles.styleMedium20(context),
-                ), // Date
-              ],
-            ),
+            child: _buildTempWidget(context),
           ),
         ),
         Positioned.fill(
@@ -44,19 +38,27 @@ class CurrentWeatherContainer extends StatelessWidget {
     );
   }
 
-  Row _buildTempWidget(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildTempWidget(BuildContext context) {
+    return Column(
       children: [
+        SvgPicture.asset(
+          AppAssets.thunderstorm2,
+          width: 200,
+        ), // Weather Icon
+        const SizedBox(height: 10),
         Text(
-          '24',
-          style: AppTextStyles.styleBold52(context).copyWith(fontSize: 72),
+          "$temp°",
+          style: AppTextStyles.styleBold52(context)
+              .copyWith(fontSize: 72, height: 0.9),
         ),
         Text(
-          '°C',
-          style: AppTextStyles.styleSemiBold30(context),
+          description,
+          style: AppTextStyles.styleBold40(context),
         ), // Temp
+        Text(
+          dateTime,
+          style: AppTextStyles.styleMedium20(context),
+        ),
       ],
     );
   }

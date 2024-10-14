@@ -30,7 +30,6 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
   @override
   void initState() {
     super.initState();
-    InternetConnectivityChecker.init();
     setLocationServices(context);
   }
 
@@ -61,7 +60,7 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
     await LocationServices.initLocationServices();
     LocationServices.callback = (lat, lon) {
       WeatherRemoteBloc.get(context).add(
-        FetchCurrentWeatherEvent(lat: lat, lon: lon),
+        FetchForecastWeatherEvent(lat: lat, lon: lon),
       );
     };
   }

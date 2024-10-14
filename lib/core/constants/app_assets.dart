@@ -23,4 +23,12 @@ abstract class AppAssets {
   static const String noConnectionErrorImg =
       'assets/images/no_connection_error_img.png';
   static const String animatedLoading = 'assets/images/animated_loading.json';
+  static const String sunriseIcon = 'assets/svg/sunrise_icon.svg';
+  static const String sunsetIcon = 'assets/svg/sunset_icon.svg';
+  static const String humidity = 'assets/svg/haze_icon.svg';
+  static const String windSpeed = 'assets/svg/wind_speed.svg';
+  static const String cloudIcon = 'assets/svg/cloud_icon.svg';
+  static const String snowIcon = 'assets/svg/snow_icon.svg';
+  static const String lowTempIcon = 'assets/svg/low_temp_icon.svg';
+  static const String highTempIcon = 'assets/svg/high_temp_icon.svg';
 }

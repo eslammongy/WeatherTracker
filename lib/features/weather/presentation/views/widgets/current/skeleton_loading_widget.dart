@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
+import 'package:weather_tracker/core/constants/app_assets.dart';
 import 'package:weather_tracker/core/loading_state/skeleton_shape.dart';
 
 class SkeletonLoadingWidget extends StatelessWidget {
@@ -14,15 +16,11 @@ class SkeletonLoadingWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           // show loading lotti file here
-          const SkeletonShape(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              width: double.infinity,
-              height: 260),
-          // Lottie.asset(
-          //   AppAssets.animatedLoading,
-          //   backgroundLoading: false,
-          //   height: 260,
-          // ),
+          Lottie.asset(
+            AppAssets.animatedLoading,
+            backgroundLoading: false,
+            height: 280,
+          ),
           const SizedBox(height: 15),
           // Grid for other skeleton weather data
           const Wrap(

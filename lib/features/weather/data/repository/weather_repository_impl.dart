@@ -1,11 +1,12 @@
 import 'dart:io';
-import 'package:dio/dio.dart';
+
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:weather_tracker/core/error/api_failure.dart';
-import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
 import 'package:weather_tracker/features/weather/data/datasource/local/weather_db_box.dart';
-import 'package:weather_tracker/features/weather/domain/repository/weather_repository.dart';
 import 'package:weather_tracker/features/weather/data/datasource/remote/weather_api_service.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
+import 'package:weather_tracker/features/weather/domain/repository/weather_repository.dart';
 
 final connectionExp = DioException.connectionError(
   requestOptions: RequestOptions(),
@@ -22,7 +23,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
     required this.weatherDbBox,
   });
   @override
-  Future<Either<ServerFailure, WeatherEntity>> fetchCurrentWeatherInfo({
+  Future<Either<ServerFailure, WeatherEntity>> fetchHourlyWeatherInfo({
     required double lat,
     required double lon,
   }) async {

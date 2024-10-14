@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 
@@ -94,3 +95,11 @@ get staticBoxShadow => BoxShadow(
       blurRadius: 2, // Blur effect
       offset: const Offset(1, 1), // Shadow position (x, y)
     );
+
+String extractTime(int? time) {
+  if (time == null) {
+    return "";
+  }
+  final datetime = DateTime.fromMicrosecondsSinceEpoch(time);
+  return DateFormat('h:mm a').format(datetime);
+}

@@ -12,12 +12,18 @@ import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MockFetchForecastWeatherUseCase mockFetchForecastWeatherUseCase;
+  late MockFetchHourlyWeatherUseCase fetchHourlyWeatherUseCase;
+  late MockFetchWeatherByCityNameUseCase fetchWeatherByCityNameUseCase;
   late WeatherRemoteBloc weatherRemoteBloc;
 
   setUp(() {
     mockFetchForecastWeatherUseCase = MockFetchForecastWeatherUseCase();
+    fetchHourlyWeatherUseCase = MockFetchHourlyWeatherUseCase();
+    fetchWeatherByCityNameUseCase = MockFetchWeatherByCityNameUseCase();
     weatherRemoteBloc = WeatherRemoteBloc(
-      fetchForecastWeatherUseCase: mockFetchForecastWeatherUseCase,
+      fetchForecastWeather: mockFetchForecastWeatherUseCase,
+      fetchHourlyWeather: fetchHourlyWeatherUseCase,
+      fetchWeatherByCityName: fetchWeatherByCityNameUseCase,
     );
   });
 
@@ -43,7 +49,7 @@ void main() {
           });
           return weatherRemoteBloc;
         },
-        act: (bloc) => bloc.add(const FetchCurrentWeatherEvent(
+        act: (bloc) => bloc.add(const FetchHourlyWeatherEvent(
           lat: lat,
           lon: lon,
         )),
@@ -62,7 +68,7 @@ void main() {
           });
           return weatherRemoteBloc;
         },
-        act: (bloc) => bloc.add(const FetchCurrentWeatherEvent(
+        act: (bloc) => bloc.add(const FetchHourlyWeatherEvent(
           lat: lat,
           lon: lon,
         )),

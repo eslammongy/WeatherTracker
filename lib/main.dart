@@ -25,7 +25,9 @@ class MyWeatherApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => WeatherRemoteBloc(
-        fetchForecastWeatherUseCase: injector.getIt(),
+        fetchHourlyWeather: injector.getIt(),
+        fetchForecastWeather: injector.getIt(),
+        fetchWeatherByCityName: injector.getIt(),
       ),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

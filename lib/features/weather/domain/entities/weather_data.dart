@@ -4,8 +4,8 @@ import 'package:weather_tracker/features/weather/domain/entities/weather_entity.
 @Entity()
 class WeatherData {
   int id = 0;
-  final double? maxTemp;
-  final double? minTemp;
+  final int? maxTemp;
+  final int? minTemp;
   final int? clouds;
   @Property(type: PropertyType.date)
   final DateTime? datetime;
@@ -13,8 +13,9 @@ class WeatherData {
   final String? description;
   final int? code;
   final int? sunriseTs;
-  final int? sunsetTs;
   final double? windSpd;
+  final int? sunsetTs;
+  final int? humidity;
   final int? temp;
   final int? snow;
 
@@ -29,17 +30,21 @@ class WeatherData {
     this.description,
     this.code,
     this.sunriseTs,
-    this.sunsetTs,
     this.windSpd,
+    this.sunsetTs,
+    this.humidity,
     this.temp,
     this.snow,
   });
 
   factory WeatherData.fromMap(Map<String, dynamic> map) {
     final weather = map['weather'];
+    var temp = double.tryParse("${map["temp"]}") ?? 0.0;
+    var minTemp = double.tryParse("${map["min_temp"]}") ?? 0.0;
+    var maxTemp = double.tryParse("${map["max_temp"]}") ?? 0.0;
     return WeatherData(
-      maxTemp: map['max_temp'] != null ? map['max_temp'] as double : null,
-      minTemp: map['min_temp'] != null ? map['min_temp'] as double : null,
+      maxTemp: map['max_temp'] != null ? maxTemp.round() : null,
+      minTemp: map['min_temp'] != null ? minTemp.round() : null,
       clouds: map['clouds'] != null ? map['clouds'] as int : null,
       datetime:
           map['datetime'] != null ? DateTime.tryParse(map['datetime']) : null,
@@ -50,8 +55,11 @@ class WeatherData {
       code: weather['code'] != null ? weather['code'] as int : null,
       sunriseTs: map['sunrise_ts'] != null ? map['sunrise_ts'] as int : null,
       sunsetTs: map['sunset_ts'] != null ? map['sunset_ts'] as int : null,
-      windSpd: map['wind_spd'] != null ? map['wind_spd'] as double : null,
-      temp: map['temp'] != null ? map['temp'] as int : null,
+      humidity: map['rh'] != null ? map['rh'] as int : null,
+      windSpd: map['wind_spd'] != null
+          ? double.tryParse("${map['wind_spd']}")
+          : null,
+      temp: map['temp'] != null ? temp.round() : null,
       snow: map['snow'] != null ? map['snow'] as int : null,
     );
   }

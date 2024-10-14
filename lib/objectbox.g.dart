@@ -61,12 +61,12 @@ final _entities = <obx_int.ModelEntity>[
         obx_int.ModelProperty(
             id: const obx_int.IdUid(2, 6802718753673915078),
             name: 'maxTemp',
-            type: 8,
+            type: 6,
             flags: 0),
         obx_int.ModelProperty(
             id: const obx_int.IdUid(3, 2391820062073948694),
             name: 'minTemp',
-            type: 8,
+            type: 6,
             flags: 0),
         obx_int.ModelProperty(
             id: const obx_int.IdUid(4, 6851390447992425464),
@@ -251,8 +251,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
               : fbb.writeString(object.description!);
           fbb.startTable(16);
           fbb.addInt64(0, object.id);
-          fbb.addFloat64(1, object.maxTemp);
-          fbb.addFloat64(2, object.minTemp);
+          fbb.addInt64(1, object.maxTemp);
+          fbb.addInt64(2, object.minTemp);
           fbb.addInt64(3, object.clouds);
           fbb.addInt64(4, object.datetime?.millisecondsSinceEpoch);
           fbb.addOffset(5, iconOffset);
@@ -273,9 +273,9 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final datetimeValue =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 12);
           final maxTempParam =
-              const fb.Float64Reader().vTableGetNullable(buffer, rootOffset, 6);
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 6);
           final minTempParam =
-              const fb.Float64Reader().vTableGetNullable(buffer, rootOffset, 8);
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 8);
           final cloudsParam =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 10);
           final datetimeParam = datetimeValue == null
@@ -349,11 +349,11 @@ class WeatherData_ {
 
   /// See [WeatherData.maxTemp].
   static final maxTemp =
-      obx.QueryDoubleProperty<WeatherData>(_entities[1].properties[1]);
+      obx.QueryIntegerProperty<WeatherData>(_entities[1].properties[1]);
 
   /// See [WeatherData.minTemp].
   static final minTemp =
-      obx.QueryDoubleProperty<WeatherData>(_entities[1].properties[2]);
+      obx.QueryIntegerProperty<WeatherData>(_entities[1].properties[2]);
 
   /// See [WeatherData.clouds].
   static final clouds =

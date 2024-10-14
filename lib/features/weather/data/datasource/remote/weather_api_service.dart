@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:weather_tracker/core/fake_data.dart';
-import 'package:weather_tracker/core/error/api_failure.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:weather_tracker/core/api/dio_service.dart';
 import 'package:weather_tracker/core/constants/api_constant.dart';
+import 'package:weather_tracker/core/error/api_failure.dart';
+import 'package:weather_tracker/core/fake_data.dart';
 import 'package:weather_tracker/features/weather/data/models/weather_model.dart';
 
 const forecastUrl =
@@ -14,7 +16,9 @@ final badResponseExp = DioException.badResponse(
 
 class WeatherApiServices {
   final Dio client;
-  WeatherApiServices({required this.client});
+  WeatherApiServices({required this.client}) {
+    DioClient.addInterceptors(client: client);
+  }
   Future<WeatherModel> getCurrentHourlyWeather({
     required double lat,
     required double lon,
@@ -41,7 +45,8 @@ class WeatherApiServices {
     try {
       final response = await client.get(url);
       if (response.statusCode == 200) {
-        return WeatherModel.fromJson(dummyJson);
+        debugPrint("Data :: ${response.data['data'].first}");
+        return WeatherModel.fromJson(response.data);
       } else {
         throw ServerFailure.handleError(badResponseExp);
       }

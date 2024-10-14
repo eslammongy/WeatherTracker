@@ -9,9 +9,12 @@ import 'package:weather_tracker/features/weather/domain/usecaces/fetch_current_w
 import 'package:weather_tracker/features/weather/domain/usecaces/fetch_forecast_weather_use_case.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_bloc.dart';
 
+import 'core/utils/internet_checker_service.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> initDependencies() async {
+  InternetConnectivityChecker.init();
   final objectBoxDb = await WeatherDbBox.create();
   //** Dio */
   getIt.registerLazySingleton<Dio>(() => Dio(BaseOptions(
@@ -33,8 +36,8 @@ Future<void> initDependencies() async {
   );
 
   //** UseCases */
-  getIt.registerLazySingleton<FetchCurrentWeatherUseCase>(
-    () => FetchCurrentWeatherUseCase(
+  getIt.registerLazySingleton<FetchHourlyWeatherUseCase>(
+    () => FetchHourlyWeatherUseCase(
       weatherRepository: getIt(),
     ),
   );
@@ -54,7 +57,9 @@ Future<void> initDependencies() async {
   //** Blocs */
   getIt.registerFactory<WeatherRemoteBloc>(
     () => WeatherRemoteBloc(
-      fetchForecastWeatherUseCase: getIt(),
+      fetchHourlyWeather: getIt(),
+      fetchForecastWeather: getIt(),
+      fetchWeatherByCityName: getIt(),
     ),
   );
 }

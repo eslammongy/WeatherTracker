@@ -18,7 +18,9 @@ class CurrentWeatherScreen extends StatelessWidget {
       child: BlocBuilder<WeatherRemoteBloc, WeatherRemoteStates>(
         builder: (context, state) {
           if (state is WeatherRemoteFetchSuccessState) {
-            return const CurrentWeatherInfo();
+            return CurrentWeatherInfo(
+              weatherEntity: state.weatherEntity,
+            );
           } else if (state is WeatherRemoteFailureState) {
             // should show error message here
             return CustomErrorWidget(failure: state.failure);

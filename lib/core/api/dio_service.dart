@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:weather_tracker/core/utils/internet_checker_service.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:weather_tracker/core/utils/internet_checker_service.dart';
 
-class ApiService {
-  final Dio _dio = Dio();
-  final List<Function> _requestQueue = [];
+abstract class DioClient {
+  static final List<Function> _requestQueue = [];
 
-  ApiService() {
-    _dio.interceptors.add(interceptors);
+  static void addInterceptors({required Dio client}) {
+    client.interceptors.add(_buildInterceptorWrapper(client));
     // Listen to connectivity changes
     InternetConnectivityChecker.startListening(
       initSubscription: (subscription) {
@@ -21,12 +20,13 @@ class ApiService {
     );
   }
 
-  get interceptors => InterceptorsWrapper(
+  static InterceptorsWrapper _buildInterceptorWrapper(Dio client) =>
+      InterceptorsWrapper(
         onRequest: (options, handler) async {
           final isPaused = InternetConnectivityChecker.subscription == null;
           if (!InternetConnectivityChecker.hasConnection && !isPaused) {
             _requestQueue.add(
-              () => _dio.fetch(options),
+              () => client.fetch(options),
             ); // Queue the failed requests
             handler.reject(
               DioException(
@@ -41,7 +41,7 @@ class ApiService {
         },
       );
   // Handle internet connection changes
-  void _connectionChangeListener(bool hasNoneConnection) {
+  static void _connectionChangeListener(bool hasNoneConnection) {
     if (hasNoneConnection) {
       // Re-send all queued requests
       for (var request in _requestQueue) {

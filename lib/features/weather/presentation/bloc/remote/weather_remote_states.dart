@@ -21,7 +21,7 @@ class WeatherRemoteFetchSuccessState extends WeatherRemoteStates {
 }
 
 class WeatherRemoteFailureState extends WeatherRemoteStates {
-  final ServerFailure failure;
+  final Failure failure;
 
   const WeatherRemoteFailureState({required this.failure});
   @override
