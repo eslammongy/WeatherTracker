@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:weather_tracker/core/error/api_failure.dart';
 import 'package:weather_tracker/features/weather/data/datasource/local/weather_db_box.dart';
 import 'package:weather_tracker/features/weather/data/datasource/remote/weather_api_service.dart';
+import 'package:weather_tracker/features/weather/data/models/weather_model.dart';
 import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
 import 'package:weather_tracker/features/weather/domain/repository/weather_repository.dart';
 
@@ -27,12 +29,14 @@ class WeatherRepositoryImpl implements WeatherRepository {
     required double lat,
     required double lon,
   }) async {
+    debugPrint("Start to fetch hourly weather info");
     try {
-      final result = await apiServices.getCurrentHourlyWeather(
+      final response = await apiServices.getCurrentHourlyWeather(
         lat: lat,
         lon: lon,
       );
-      return Right(result);
+      final weatherData = WeatherModel.fromJson(response.data);
+      return Right(weatherData);
     } on DioException catch (dioExp) {
       return Left(ServerFailure.handleError(dioExp));
     } on SocketException catch (_) {
@@ -46,11 +50,12 @@ class WeatherRepositoryImpl implements WeatherRepository {
     required double lon,
   }) async {
     try {
-      final result = await apiServices.getForecastWeather(
+      final response = await apiServices.getForecastWeather(
         lat: lat,
         lon: lon,
       );
-      return Right(result);
+      final weatherData = WeatherModel.fromJson(response.data);
+      return Right(weatherData);
     } on DioException catch (dioExp) {
       return Left(ServerFailure.handleError(dioExp));
     } on SocketException catch (_) {
@@ -63,8 +68,9 @@ class WeatherRepositoryImpl implements WeatherRepository {
     required String name,
   }) async {
     try {
-      final result = await apiServices.getWeatherByCityName(name: name);
-      return Right(result);
+      final response = await apiServices.getWeatherByCityName(name: name);
+      final weatherData = WeatherModel.fromJson(response.data);
+      return Right(weatherData);
     } on DioException catch (dioExp) {
       return Left(ServerFailure.handleError(dioExp));
     } on SocketException catch (_) {

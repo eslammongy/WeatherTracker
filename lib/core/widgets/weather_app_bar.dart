@@ -5,7 +5,6 @@ import 'package:weather_tracker/config/theme/app_colors_extension.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 import 'package:weather_tracker/core/utils/helper.dart';
-import 'package:weather_tracker/core/utils/internet_checker_service.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_bloc.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_states.dart';
 
@@ -53,7 +52,7 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
   ) {
     final width = MediaQuery.sizeOf(context).width;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 0),
       child: DecoratedBox(
         decoration: BoxDecoration(
             border: Border.all(width: 2, color: appColors.primary),
@@ -72,7 +71,7 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: Icon(
                         Icons.circle,
                         size: 18,
-                        color: InternetConnectivityChecker.hasConnection
+                        color: state is WeatherRemoteFetchSuccessState
                             ? Colors.green
                             : Colors.grey,
                       ),
@@ -91,7 +90,7 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
                     width: 10,
                   ),
                   SizedBox(
-                      width: width * 0.4,
+                      width: width * 0.3,
                       child: CurrentLocationCity(
                         weather: state is WeatherRemoteFetchSuccessState
                             ? state.weatherEntity

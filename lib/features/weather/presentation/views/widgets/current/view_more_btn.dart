@@ -25,7 +25,7 @@ class ViewMoreBtn extends StatelessWidget {
         height: width,
         width: height,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+          padding: const EdgeInsets.all(35),
           child: InkWell(
             borderRadius: BorderRadius.circular(100),
             onTap: () {

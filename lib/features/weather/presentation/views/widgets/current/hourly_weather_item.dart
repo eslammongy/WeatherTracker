@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:weather_tracker/core/utils/helper.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:weather_tracker/core/utils/helper.dart';
+import 'package:weather_tracker/core/utils/status_icon_helper.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
 
 class HourlyWeatherItem extends StatelessWidget {
-  const HourlyWeatherItem({super.key});
+  const HourlyWeatherItem({
+    super.key,
+    required this.weatherData,
+  });
+  final WeatherData weatherData;
 
   @override
   Widget build(BuildContext context) {
@@ -15,28 +22,28 @@ class HourlyWeatherItem extends StatelessWidget {
         margin: const EdgeInsets.only(right: 10),
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color(0xff362A84), Color(0xff5936B4)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+            color: context.theme.appColors.surface,
             boxShadow: [
               staticBoxShadow,
             ],
-            borderRadius: const BorderRadius.all(Radius.circular(15))),
+            borderRadius: const BorderRadius.all(Radius.circular(16))),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text("12:00",
-                style: AppTextStyles.styleSemiBold20(context)
-                    .copyWith(color: Colors.white)),
+            Text(
+              extractTime(weatherData.datetime?.microsecondsSinceEpoch),
+              style: AppTextStyles.styleSemiBold20(context),
+            ),
             const SizedBox(height: 10),
-            const Icon(FontAwesomeIcons.cloudRain,
-                size: 40, color: Colors.white),
+            SvgPicture.asset(
+              StatusIconHelper.getWeatherIcon(code: weatherData.code ?? 800),
+              width: 60,
+            ),
             const SizedBox(height: 10),
-            Text('24°C',
-                style: AppTextStyles.styleSemiBold24(context)
-                    .copyWith(color: Colors.white)),
+            Text(
+              '${weatherData.temp}°C',
+              style: AppTextStyles.styleSemiBold24(context),
+            ),
           ],
         ),
       ),

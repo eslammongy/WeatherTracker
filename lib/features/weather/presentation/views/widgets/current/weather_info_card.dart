@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
+import 'package:weather_tracker/core/utils/helper.dart';
 
 class WeatherInfoCard extends StatelessWidget {
   final IconData? icon;
@@ -21,32 +22,34 @@ class WeatherInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: width,
       height: 150,
-      child: Card(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
         color: context.theme.appColors.surface,
-        elevation: 2,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              iconPath == null
-                  ? Icon(icon!, size: 35)
-                  : SvgPicture.asset(
-                      iconPath!,
-                      width: 35,
-                    ),
-              const SizedBox(height: 10),
-              Text(title, style: AppTextStyles.styleMedium18(context)),
-              const SizedBox(height: 5),
-              if (value != null) ...[
-                Text(value!, style: AppTextStyles.styleMedium18(context))
-              ],
-            ],
-          ),
-        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          staticBoxShadow,
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          iconPath == null
+              ? Icon(icon!, size: 35)
+              : SvgPicture.asset(
+                  iconPath!,
+                  width: 35,
+                ),
+          const SizedBox(height: 10),
+          Text(title,
+              maxLines: 1, style: AppTextStyles.styleRegular16(context)),
+          const SizedBox(height: 5),
+          if (value != null) ...[
+            Text(value!, style: AppTextStyles.styleMedium18(context))
+          ],
+        ],
       ),
     );
   }

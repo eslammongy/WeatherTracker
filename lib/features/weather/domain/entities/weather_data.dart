@@ -1,4 +1,5 @@
 import 'package:objectbox/objectbox.dart';
+import 'package:weather_tracker/core/utils/helper.dart';
 import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
 
 @Entity()
@@ -46,8 +47,7 @@ class WeatherData {
       maxTemp: map['max_temp'] != null ? maxTemp.round() : null,
       minTemp: map['min_temp'] != null ? minTemp.round() : null,
       clouds: map['clouds'] != null ? map['clouds'] as int : null,
-      datetime:
-          map['datetime'] != null ? DateTime.tryParse(map['datetime']) : null,
+      datetime: _setWeatherDate(map),
       icon: weather['icon'] != null ? weather['icon'] as String : null,
       description: weather['description'] != null
           ? weather['description'] as String
@@ -63,6 +63,14 @@ class WeatherData {
       snow: map['snow'] != null ? map['snow'] as int : null,
     );
   }
+
+  static DateTime? _setWeatherDate(Map<String, dynamic> map) {
+    return map['datetime'] != null
+        ? DateTime.tryParse(map['datetime']) ??
+            validateDatetime(map['datetime'])
+        : null;
+  }
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;

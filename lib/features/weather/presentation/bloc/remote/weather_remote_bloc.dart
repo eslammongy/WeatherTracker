@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
@@ -12,6 +13,7 @@ class WeatherRemoteBloc extends Bloc<WeatherRemoteEvents, WeatherRemoteStates> {
   final FetchHourlyWeatherUseCase fetchHourlyWeather;
   final FetchWeatherByCityNameUseCase fetchWeatherByCityName;
   final List<WeatherData> forecastList = [];
+  List<WeatherData> hourlyList = [];
 
   static WeatherRemoteBloc get(context) => BlocProvider.of(context);
   WeatherRemoteBloc({
@@ -19,27 +21,23 @@ class WeatherRemoteBloc extends Bloc<WeatherRemoteEvents, WeatherRemoteStates> {
     required this.fetchHourlyWeather,
     required this.fetchWeatherByCityName,
   }) : super(WeatherRemoteInitialState()) {
-    on<FetchHourlyWeatherEvent>(onFetchHourlyWeatherData);
     on<FetchForecastWeatherEvent>(onFetchForecastWeatherData);
     on<FetchCityWeatherEvent>(onFetchCityWeatherData);
   }
 
-  onFetchHourlyWeatherData(
-    FetchHourlyWeatherEvent event,
-    Emitter<WeatherRemoteStates> emit,
-  ) async {
-    emit(WeatherRemoteLoadingState());
+  Future<List<WeatherData>?> fetchHourlyWeatherData(
+      {required double lat, required double lon}) async {
+    // emit(WeatherRemoteHrLoadingState());
     final result = await fetchHourlyWeather.execute(
-      lat: event.lat,
-      lon: event.lon,
+      lat: lat,
+      lon: lon,
     );
     result.fold((failure) {
-      debugPrint("Request Failure::$failure");
-      emit(WeatherRemoteFailureState(failure: failure));
+      throw DioException(requestOptions: RequestOptions(), error: failure);
     }, (data) {
-      debugPrint("Request Success::${data.cityName}");
-      emit(WeatherRemoteFetchSuccessState(weatherEntity: data));
+      hourlyList = data.weatherData ?? [];
     });
+    return hourlyList;
   }
 
   onFetchForecastWeatherData(

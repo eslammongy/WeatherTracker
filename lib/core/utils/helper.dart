@@ -90,8 +90,8 @@ void displaySnackBar(
 }
 
 get staticBoxShadow => BoxShadow(
-      color: Colors.grey.withOpacity(0.2), // Shadow color with transparency
-      spreadRadius: 1, // How far the shadow extends
+      color: Colors.black.withOpacity(0.4), // Shadow color with transparency
+      spreadRadius: 2, // How far the shadow extends
       blurRadius: 2, // Blur effect
       offset: const Offset(1, 1), // Shadow position (x, y)
     );
@@ -109,4 +109,13 @@ String extractDateTime(DateTime? dateTime) {
     return "";
   }
   return DateFormat.yMMMMEEEEd().format(dateTime);
+}
+
+DateTime validateDatetime(String strDate) {
+  final dateString = strDate.replaceFirst(':', ' ');
+  // Define the format pattern for the input string
+  DateFormat format = DateFormat('yyyy-MM-dd HH');
+  // Parse the string into a DateTime object
+  DateTime parsedDate = format.parse(dateString);
+  return parsedDate;
 }

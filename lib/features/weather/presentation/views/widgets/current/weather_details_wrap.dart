@@ -11,10 +11,17 @@ class WeatherDetailsWrap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      direction: Axis.horizontal,
-      spacing: 10,
-      runSpacing: 10,
+    return GridView(
+      scrollDirection: Axis.vertical,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      padding: EdgeInsets.zero,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3, // 2 columns
+        crossAxisSpacing: 12, // Space between columns
+        mainAxisSpacing: 12, // Space between rows
+        mainAxisExtent: 150,
+      ),
       children: [
         // Sunrise Info
         WeatherInfoCard(
@@ -45,8 +52,8 @@ class WeatherDetailsWrap extends StatelessWidget {
           value: '${weatherData.clouds} km/h',
         ),
         ViewMoreBtn(
-          width: 125,
-          height: 125,
+          width: 100,
+          height: 100,
           weatherData: weatherData,
         ),
       ],

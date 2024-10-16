@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 import 'package:weather_tracker/core/constants/app_assets.dart';
+import 'package:weather_tracker/core/utils/status_icon_helper.dart';
 import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
 
 class ForecastListItem extends StatelessWidget {
@@ -32,8 +33,7 @@ class ForecastListItem extends StatelessWidget {
               right: 45,
               top: 0,
               child: SvgPicture.asset(
-                AppAssets.thunderstorm2,
-                fit: BoxFit.contain,
+                StatusIconHelper.getWeatherIcon(code: weatherData.code ?? 800),
                 width: 120,
               ),
             ),
@@ -69,10 +69,12 @@ class ForecastListItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text(
-                    weatherData.description ?? '',
-                    style: AppTextStyles.styleSemiBold30(context)
-                        .copyWith(color: Colors.white),
+                  Expanded(
+                    child: Text(
+                      weatherData.description ?? '',
+                      style: AppTextStyles.styleSemiBold30(context)
+                          .copyWith(color: Colors.white),
+                    ),
                   ),
                 ],
               ),

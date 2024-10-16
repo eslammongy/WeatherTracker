@@ -1,13 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:weather_tracker/core/api/dio_service.dart';
 import 'package:weather_tracker/core/constants/api_constant.dart';
 import 'package:weather_tracker/core/error/api_failure.dart';
-import 'package:weather_tracker/core/fake_data.dart';
-import 'package:weather_tracker/features/weather/data/models/weather_model.dart';
 
 const forecastUrl =
-    "$baseUrl${forecastEndPoint}daily?lat=38.123&lon=-78.543&key=9e602ac39a514d9882058a4f278d124e&days=2";
+    "$baseUrl$forecastEndPoint?lat=38.123&lon=-78.543&key=9e602ac39a514d9882058a4f278d124e&days=2";
 
 final badResponseExp = DioException.badResponse(
     requestOptions: RequestOptions(),
@@ -19,14 +16,16 @@ class WeatherApiServices {
   WeatherApiServices({required this.client}) {
     DioClient.addInterceptors(client: client);
   }
-  Future<WeatherModel> getCurrentHourlyWeather({
+  Future<Response> getCurrentHourlyWeather({
     required double lat,
     required double lon,
   }) async {
+    final hourlyUrl =
+        "$baseUrl/forecast/hourly?lat=$lat&lon=$lon&key=$appKey&hours=10";
     try {
-      final response = await client.get(forecastUrl);
+      final response = await client.get(hourlyUrl);
       if (response.statusCode == 200) {
-        return WeatherModel.fromJson(dummyJson);
+        return response;
       } else {
         throw ServerFailure.handleError(badResponseExp);
       }
@@ -35,7 +34,7 @@ class WeatherApiServices {
     }
   }
 
-  Future<WeatherModel> getForecastWeather({
+  Future<Response> getForecastWeather({
     required double lat,
     required double lon,
   }) async {
@@ -45,8 +44,7 @@ class WeatherApiServices {
     try {
       final response = await client.get(url);
       if (response.statusCode == 200) {
-        debugPrint("Data :: ${response.data['data'].first}");
-        return WeatherModel.fromJson(response.data);
+        return response;
       } else {
         throw ServerFailure.handleError(badResponseExp);
       }
@@ -55,11 +53,11 @@ class WeatherApiServices {
     }
   }
 
-  Future<WeatherModel> getWeatherByCityName({required String name}) async {
+  Future<Response> getWeatherByCityName({required String name}) async {
     try {
       final response = await client.get(forecastUrl);
       if (response.statusCode == 200) {
-        return WeatherModel.fromJson(dummyJson);
+        return response;
       } else {
         throw ServerFailure.handleError(badResponseExp);
       }

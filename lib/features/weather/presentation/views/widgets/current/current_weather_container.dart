@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
-import 'package:weather_tracker/core/constants/app_assets.dart';
+import 'package:weather_tracker/core/utils/status_icon_helper.dart';
 
 class CurrentWeatherContainer extends StatelessWidget {
   const CurrentWeatherContainer({
@@ -14,7 +14,7 @@ class CurrentWeatherContainer extends StatelessWidget {
   final String dateTime;
   final String description;
   final int temp;
-  final String code;
+  final int code;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,11 @@ class CurrentWeatherContainer extends StatelessWidget {
             child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Opacity(
-              opacity: 0.1, child: SvgPicture.asset(AppAssets.thunderstorm2)),
+            opacity: 0.08,
+            child: SvgPicture.asset(
+              StatusIconHelper.getWeatherIcon(code: code),
+            ),
+          ),
         )),
       ],
     );
@@ -42,7 +46,7 @@ class CurrentWeatherContainer extends StatelessWidget {
     return Column(
       children: [
         SvgPicture.asset(
-          AppAssets.thunderstorm2,
+          StatusIconHelper.getWeatherIcon(code: code),
           width: 200,
         ), // Weather Icon
         const SizedBox(height: 10),

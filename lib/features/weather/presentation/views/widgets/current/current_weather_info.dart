@@ -22,7 +22,7 @@ class CurrentWeatherInfo extends StatelessWidget {
         children: [
           CurrentWeatherContainer(
             dateTime: extractDateTime(currentDay.datetime),
-            code: "${currentDay.code}",
+            code: currentDay.code ?? 800,
             temp: currentDay.temp ?? 0,
             description: currentDay.description ?? "Sunny",
           ),

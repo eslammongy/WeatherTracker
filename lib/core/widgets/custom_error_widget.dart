@@ -15,16 +15,19 @@ class CustomErrorWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
           const SizedBox(
             height: 160,
           ),
-          Image.asset(
-            failure.exceptionType == DioExceptionType.connectionError
-                ? AppAssets.noConnectionErrorImg
-                : AppAssets.responseErrorImg,
-            width: 200,
+          Center(
+            child: Image.asset(
+              failure.exceptionType == DioExceptionType.connectionError
+                  ? AppAssets.noConnectionErrorImg
+                  : AppAssets.responseErrorImg,
+              width: 200,
+            ),
           ),
           const SizedBox(
             height: 20,
