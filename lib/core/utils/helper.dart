@@ -4,9 +4,10 @@ import 'package:intl/intl.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 
-const pubBoxDecoration = BoxDecoration(
-  borderRadius: BorderRadius.all(Radius.circular(100)),
-  gradient: LinearGradient(
+var pubBoxDecoration = BoxDecoration(
+  borderRadius: const BorderRadius.all(Radius.circular(100)),
+  boxShadow: [staticBoxShadow],
+  gradient: const LinearGradient(
     colors: [
       Color(0xFF5F20F1),
       Color(0xFF831D95),
@@ -90,7 +91,7 @@ void displaySnackBar(
 }
 
 get staticBoxShadow => BoxShadow(
-      color: Colors.black.withOpacity(0.4), // Shadow color with transparency
+      color: Colors.black.withOpacity(0.2), // Shadow color with transparency
       spreadRadius: 2, // How far the shadow extends
       blurRadius: 2, // Blur effect
       offset: const Offset(1, 1), // Shadow position (x, y)

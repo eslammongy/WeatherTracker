@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_tracker/core/constants/app_assets.dart';
 import 'package:weather_tracker/core/utils/animated_dialog.dart';
 import 'package:weather_tracker/core/utils/helper.dart';
@@ -9,47 +8,41 @@ import 'package:weather_tracker/features/weather/presentation/views/widgets/curr
 class ViewMoreBtn extends StatelessWidget {
   const ViewMoreBtn({
     super.key,
-    this.width = 50,
-    this.height = 50,
-    this.isForecastOpened = false,
     required this.weatherData,
   });
-  final double width;
-  final double height;
-  final bool isForecastOpened;
+
   final WeatherData weatherData;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: width,
-        width: height,
-        child: Padding(
-          padding: const EdgeInsets.all(35),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(100),
-            onTap: () {
-              showAnimatedDialog(
-                context,
-                title: "Weather Details",
-                body: _buildMoreWeatherInfoGrid(weatherData),
-              );
-            },
-            child: DecoratedBox(
-              decoration: isForecastOpened
-                  ? BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(100))
-                  : pubBoxDecoration,
-              child: Icon(
-                  isForecastOpened
-                      ? FontAwesomeIcons.ellipsis
-                      : Icons.arrow_forward,
-                  size: 28,
-                  color: Colors.white),
+    return InkWell(
+      borderRadius: BorderRadius.circular(1),
+      onTap: () {
+        showAnimatedDialog(
+          context,
+          title: "Weather Details",
+          body: _buildMoreWeatherInfoGrid(weatherData),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 18),
+        child: DecoratedBox(
+          decoration: pubBoxDecoration.copyWith(
+              borderRadius: BorderRadius.circular(16)),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Transform.scale(
+              scale: 1.4,
+              child: const Icon(
+                Icons.arrow_forward_rounded,
+                size: 28,
+                color: Colors.white,
+              ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Expanded _buildMoreWeatherInfoGrid(WeatherData weatherData) {
@@ -57,7 +50,8 @@ class ViewMoreBtn extends StatelessWidget {
         child: GridView(
             scrollDirection: Axis.vertical,
             physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.only(bottom: 20, top: 10),
+            padding:
+                const EdgeInsets.only(bottom: 20, top: 10, left: 8, right: 8),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, // 2 columns
               crossAxisSpacing: 10, // Space between columns

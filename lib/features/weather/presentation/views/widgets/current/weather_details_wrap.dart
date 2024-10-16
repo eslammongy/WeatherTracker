@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:weather_tracker/core/constants/app_assets.dart';
-import 'package:weather_tracker/core/utils/helper.dart';
 import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
-import 'package:weather_tracker/features/weather/presentation/views/widgets/current/view_more_btn.dart';
 import 'package:weather_tracker/features/weather/presentation/views/widgets/current/weather_info_card.dart';
+
+import 'view_more_btn.dart';
 
 class WeatherDetailsWrap extends StatelessWidget {
   const WeatherDetailsWrap({super.key, required this.weatherData});
@@ -22,17 +22,21 @@ class WeatherDetailsWrap extends StatelessWidget {
         mainAxisSpacing: 12, // Space between rows
         mainAxisExtent: 150,
       ),
-      children: [
+      children: gridChild,
+    );
+  }
+
+  List<Widget> get gridChild => [
         // Sunrise Info
         WeatherInfoCard(
-          iconPath: AppAssets.sunriseIcon,
-          title: 'Sunrise',
-          value: extractTime(weatherData.sunriseTs),
+          iconPath: AppAssets.highTempIcon,
+          title: 'Max Temp',
+          value: "${weatherData.maxTemp}",
         ),
         WeatherInfoCard(
-          iconPath: AppAssets.sunsetIcon,
-          title: 'Sunset',
-          value: extractTime(weatherData.sunsetTs),
+          iconPath: AppAssets.lowTempIcon,
+          title: 'Min Temp',
+          value: "${weatherData.minTemp}",
         ),
         // Wind Speed Info
         WeatherInfoCard(
@@ -51,12 +55,6 @@ class WeatherDetailsWrap extends StatelessWidget {
           title: 'Clouds',
           value: '${weatherData.clouds} km/h',
         ),
-        ViewMoreBtn(
-          width: 100,
-          height: 100,
-          weatherData: weatherData,
-        ),
-      ],
-    );
-  }
+        ViewMoreBtn(weatherData: weatherData)
+      ];
 }

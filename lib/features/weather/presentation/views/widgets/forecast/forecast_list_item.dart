@@ -70,10 +70,15 @@ class ForecastListItem extends StatelessWidget {
                     ],
                   ),
                   Expanded(
-                    child: Text(
-                      weatherData.description ?? '',
-                      style: AppTextStyles.styleSemiBold30(context)
-                          .copyWith(color: Colors.white),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        weatherData.description ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.styleSemiBold30(context)
+                            .copyWith(color: Colors.white),
+                      ),
                     ),
                   ),
                 ],

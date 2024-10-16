@@ -12,6 +12,11 @@ Future<void> main() async {
   await injector.initDependencies();
   await Future.delayed(const Duration(milliseconds: 200), () {
     FlutterNativeSplash.remove();
+    // runApp(
+    //   DevicePreview(
+    //     builder: (context) => const MyWeatherApp(),
+    //   ),
+    // );
     runApp(
       const MyWeatherApp(),
     );

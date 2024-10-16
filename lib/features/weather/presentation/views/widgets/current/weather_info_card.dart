@@ -41,6 +41,9 @@ class WeatherInfoCard extends StatelessWidget {
               : SvgPicture.asset(
                   iconPath!,
                   width: 35,
+                  colorFilter: context.theme.brightness == Brightness.light
+                      ? const ColorFilter.mode(Colors.black54, BlendMode.srcIn)
+                      : null,
                 ),
           const SizedBox(height: 10),
           Text(title,
