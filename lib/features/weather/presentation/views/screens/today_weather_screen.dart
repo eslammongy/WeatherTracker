@@ -15,10 +15,17 @@ class TodayWeatherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final weatherRemoteBloc = WeatherRemoteBloc.get(context);
     return SingleChildScrollView(
       child: BlocBuilder<WeatherRemoteBloc, WeatherRemoteStates>(
         builder: (context, state) {
-          if (state is WeatherRemoteFetchSuccessState) {
+          if (weatherRemoteBloc.weatherEntity != null) {
+            return CurrentWeatherInfo(
+              weatherEntity: weatherRemoteBloc.weatherEntity!,
+              subView: const HourlyWeatherData(),
+              subViewTitle: "Hourly",
+            );
+          } else if (state is WeatherRemoteFetchSuccessState) {
             return CurrentWeatherInfo(
               weatherEntity: state.weatherEntity,
               subView: const HourlyWeatherData(),

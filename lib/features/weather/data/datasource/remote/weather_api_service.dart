@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:weather_tracker/core/api/dio_service.dart';
 import 'package:weather_tracker/core/constants/api_constant.dart';
-import 'package:weather_tracker/core/error/api_failure.dart';
 
 const forecastUrl =
     "$baseUrl$forecastEndPoint?lat=38.123&lon=-78.543&key=9e602ac39a514d9882058a4f278d124e&days=2";
@@ -27,7 +26,7 @@ class WeatherApiServices {
       if (response.statusCode == 200) {
         return response;
       } else {
-        throw ServerFailure.handleError(badResponseExp);
+        throw badResponseExp;
       }
     } catch (_) {
       rethrow;
@@ -46,7 +45,7 @@ class WeatherApiServices {
       if (response.statusCode == 200) {
         return response;
       } else {
-        throw ServerFailure.handleError(badResponseExp);
+        throw badResponseExp;
       }
     } catch (_) {
       rethrow;
@@ -61,7 +60,7 @@ class WeatherApiServices {
       if (response.statusCode == 200) {
         return response;
       } else {
-        throw ServerFailure.handleError(badResponseExp);
+        throw badResponseExp;
       }
     } catch (_) {
       rethrow;

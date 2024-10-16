@@ -22,10 +22,10 @@ class WeatherRemoteFetchSuccessState extends WeatherRemoteStates {
   List<Object> get props => [weatherEntity];
 }
 
-class WeatherRemoteFetchHourlyState extends WeatherRemoteStates {
+class WeatherRemoteSearchState extends WeatherRemoteStates {
   final WeatherEntity weatherEntity;
 
-  const WeatherRemoteFetchHourlyState({required this.weatherEntity});
+  const WeatherRemoteSearchState({required this.weatherEntity});
   @override
   List<Object> get props => [weatherEntity];
 }

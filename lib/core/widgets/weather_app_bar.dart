@@ -5,6 +5,8 @@ import 'package:weather_tracker/config/theme/app_colors_extension.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 import 'package:weather_tracker/core/utils/helper.dart';
+import 'package:weather_tracker/core/utils/internet_checker_service.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_bloc.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_states.dart';
 
@@ -51,6 +53,7 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
     AppColorEx appColors,
   ) {
     final width = MediaQuery.sizeOf(context).width;
+    final weatherRemoteBloc = WeatherRemoteBloc.get(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: DecoratedBox(
@@ -61,6 +64,9 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(left: 10),
           child: BlocBuilder<WeatherRemoteBloc, WeatherRemoteStates>(
             builder: (context, state) {
+              bool hasSuccessfulRequest =
+                  state is WeatherRemoteFetchSuccessState ||
+                      weatherRemoteBloc.weatherEntity != null;
               return Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -71,7 +77,7 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: Icon(
                         Icons.circle,
                         size: 18,
-                        color: state is WeatherRemoteFetchSuccessState
+                        color: InternetConnectivityChecker.hasConnection
                             ? Colors.green
                             : Colors.grey,
                       ),
@@ -80,9 +86,9 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
                   const SizedBox(
                     width: 10,
                   ),
-                  state is WeatherRemoteFetchSuccessState
+                  hasSuccessfulRequest
                       ? Text(
-                          "last update ${extractTime(DateTime.now().microsecondsSinceEpoch)}",
+                          getLatestUpdate(weatherRemoteBloc.weatherEntity),
                           style: AppTextStyles.styleSemiBold18(context),
                         )
                       : const SizedBox(),
@@ -91,10 +97,11 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   SizedBox(
                       width: width * 0.3,
+                      height: 45,
                       child: CurrentLocationCity(
                         weather: state is WeatherRemoteFetchSuccessState
                             ? state.weatherEntity
-                            : null,
+                            : weatherRemoteBloc.weatherEntity,
                       ))
                 ],
               );
@@ -103,6 +110,14 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
     );
+  }
+
+  String getLatestUpdate(WeatherEntity? weather) {
+    if (weather == null) return "00:00";
+    final today = weather.weatherData?.first;
+    final lastUpdatedTime =
+        extractTime(today!.datetime!.microsecondsSinceEpoch);
+    return "last update $lastUpdatedTime";
   }
 
   @override

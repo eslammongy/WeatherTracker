@@ -31,4 +31,5 @@ abstract class AppAssets {
   static const String snowIcon = 'assets/svg/snow_icon.svg';
   static const String lowTempIcon = 'assets/svg/low_temp_icon.svg';
   static const String highTempIcon = 'assets/svg/high_temp_icon.svg';
+  static const String searchImg = 'assets/svg/search_img.svg';
 }
