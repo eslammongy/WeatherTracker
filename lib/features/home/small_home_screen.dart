@@ -6,9 +6,9 @@ import 'package:weather_tracker/core/widgets/weather_app_bar.dart';
 import 'package:weather_tracker/features/home/bottom_nav_bar.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_bloc.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_events.dart';
-import 'package:weather_tracker/features/weather/presentation/views/screens/current_weather_screen.dart';
 import 'package:weather_tracker/features/weather/presentation/views/screens/forecast_screen.dart';
 import 'package:weather_tracker/features/weather/presentation/views/screens/search_for_city_screen.dart';
+import 'package:weather_tracker/features/weather/presentation/views/screens/today_weather_screen.dart';
 import 'package:weather_tracker/features/weather/presentation/views/widgets/location_request_dialog.dart';
 
 class SmallHomeScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
   bool isDarkMode = false;
   int currentIndex = 0;
   final screens = [
-    const CurrentWeatherScreen(),
+    const TodayWeatherScreen(),
     const ForeCastScreen(),
     const SearchForCityScreen(),
   ];

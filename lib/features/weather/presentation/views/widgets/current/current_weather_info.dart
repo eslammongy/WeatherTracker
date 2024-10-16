@@ -4,12 +4,18 @@ import 'package:weather_tracker/core/utils/helper.dart';
 import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
 
 import 'current_weather_container.dart';
-import 'hourly_weather_data.dart';
 import 'weather_details_wrap.dart';
 
 class CurrentWeatherInfo extends StatelessWidget {
-  const CurrentWeatherInfo({super.key, required this.weatherEntity});
+  const CurrentWeatherInfo({
+    super.key,
+    required this.weatherEntity,
+    required this.subViewTitle,
+    required this.subView,
+  });
   final WeatherEntity weatherEntity;
+  final String subViewTitle;
+  final Widget subView;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +41,12 @@ class CurrentWeatherInfo extends StatelessWidget {
           Align(
             alignment: Alignment.topLeft,
             child: Text(
-              "hourly",
+              subViewTitle,
               style: AppTextStyles.styleSemiBold30(context),
             ),
           ),
           const SizedBox(height: 10),
-          const HourlyWeatherData(),
+          subView,
         ],
       ),
     );

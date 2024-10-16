@@ -54,8 +54,10 @@ class WeatherApiServices {
   }
 
   Future<Response> getWeatherByCityName({required String name}) async {
+    final url =
+        "$baseUrl${forecastEndPoint}daily?city=$name&key=$appKey&days=7";
     try {
-      final response = await client.get(forecastUrl);
+      final response = await client.get(url);
       if (response.statusCode == 200) {
         return response;
       } else {
