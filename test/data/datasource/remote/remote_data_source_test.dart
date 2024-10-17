@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../../helpers/test_helper.mocks.dart';
-import 'package:weather_tracker/core/fake_data.dart';
-import 'package:weather_tracker/core/error/api_failure.dart';
+import 'package:mockito/mockito.dart';
 import 'package:weather_tracker/core/constants/api_constant.dart';
-import 'package:weather_tracker/features/weather/data/models/weather_model.dart';
+import 'package:weather_tracker/core/error/api_failure.dart';
+import 'package:weather_tracker/core/fake_data.dart';
 import 'package:weather_tracker/features/weather/data/datasource/remote/weather_api_service.dart';
+import 'package:weather_tracker/features/weather/data/models/weather_model.dart';
+
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MockDio mockDio;
@@ -15,7 +16,7 @@ void main() {
   setUp(
     () {
       mockDio = MockDio();
-      apiServices = WeatherApiServices(client: mockDio);
+      apiServices = WeatherApiServices(dioClient: mockDio);
     },
   );
 

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:weather_tracker/core/api/dio_service.dart';
 import 'package:weather_tracker/core/constants/api_constant.dart';
@@ -11,9 +13,10 @@ final badResponseExp = DioException.badResponse(
     response: Response(requestOptions: RequestOptions()));
 
 class WeatherApiServices {
-  final Dio client;
-  WeatherApiServices({required this.client}) {
-    DioClient.addInterceptors(client: client);
+  final Dio dioClient;
+  late final DioService dioServices;
+  WeatherApiServices({required this.dioClient}) {
+    dioServices = DioService(dio: dioClient);
   }
   Future<Response> getCurrentHourlyWeather({
     required double lat,
@@ -22,7 +25,7 @@ class WeatherApiServices {
     final hourlyUrl =
         "$baseUrl/forecast/hourly?lat=$lat&lon=$lon&key=$appKey&hours=10";
     try {
-      final response = await client.get(hourlyUrl);
+      final response = await dioClient.get(hourlyUrl);
       if (response.statusCode == 200) {
         return response;
       } else {
@@ -41,7 +44,7 @@ class WeatherApiServices {
         "$baseUrl${forecastEndPoint}daily?lat=$lat&lon=$lon&key=$appKey&days=12";
 
     try {
-      final response = await client.get(url);
+      final response = await dioClient.get(url);
       if (response.statusCode == 200) {
         return response;
       } else {
@@ -56,7 +59,7 @@ class WeatherApiServices {
     final url =
         "$baseUrl${forecastEndPoint}daily?city=$name&key=$appKey&days=7";
     try {
-      final response = await client.get(url);
+      final response = await dioClient.get(url);
       if (response.statusCode == 200) {
         return response;
       } else {

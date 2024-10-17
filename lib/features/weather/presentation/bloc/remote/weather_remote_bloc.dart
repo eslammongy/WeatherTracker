@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_tracker/core/api/dio_service.dart';
+import 'package:weather_tracker/core/error/api_failure.dart';
 import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
 import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
 import 'package:weather_tracker/features/weather/domain/usecaces/fetch_city_weather_use_case.dart';
@@ -67,11 +69,21 @@ class WeatherRemoteBloc extends Bloc<WeatherRemoteEvents, WeatherRemoteStates> {
     latestSearchLabel = event.cityName;
     final result = await fetchWeatherByCityName.execute(name: event.cityName);
     result.fold((failure) {
-      debugPrint("Request Failure::$failure");
+      _addingFailedRequestToRetryQueue(
+          failure, FetchCityWeatherEvent(cityName: event.cityName));
       emit(WeatherRemoteFailureState(failure: failure));
     }, (data) {
       debugPrint("Request Success::${data.cityName}");
       emit(WeatherRemoteSearchState(weatherEntity: data));
     });
+  }
+
+  void _addingFailedRequestToRetryQueue(
+      Failure failure, FetchCityWeatherEvent event) {
+    debugPrint(
+        "Adding request to retry queue: ${event.cityName}..Failure: ${failure.exceptionType}");
+    if (failure.exceptionType == DioExceptionType.connectionError) {
+      DioService.addEventToRetryQueue(() => add(event));
+    }
   }
 }

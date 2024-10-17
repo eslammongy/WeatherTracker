@@ -17,13 +17,11 @@ Future<void> initDependencies() async {
   InternetConnectivityChecker.init();
   final objectBoxDb = await WeatherDbBox.create();
   //** Dio */
-  getIt.registerLazySingleton<Dio>(() => Dio(BaseOptions(
-      connectTimeout: const Duration(seconds: 30),
-      responseType: ResponseType.json)));
+  getIt.registerLazySingleton<Dio>(() => Dio());
 
   //** Api services */
   getIt.registerLazySingleton<WeatherApiServices>(
-      () => WeatherApiServices(client: getIt()));
+      () => WeatherApiServices(dioClient: getIt()));
 
   getIt.registerLazySingleton<WeatherDbBox>(() => objectBoxDb);
 

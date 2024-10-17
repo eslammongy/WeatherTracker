@@ -305,7 +305,7 @@ class MockWeatherApiServices extends _i1.Mock
   }
 
   @override
-  _i3.Dio get client => (super.noSuchMethod(
+  _i3.Dio get dioClient => (super.noSuchMethod(
         Invocation.getter(#client),
         returnValue: _FakeDio_1(
           this,

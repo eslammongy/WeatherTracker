@@ -25,7 +25,7 @@ class ViewMoreBtn extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 18),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 28),
         child: DecoratedBox(
           decoration: pubBoxDecoration.copyWith(
               borderRadius: BorderRadius.circular(16)),

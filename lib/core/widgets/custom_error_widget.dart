@@ -40,14 +40,14 @@ class CustomErrorWidget extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          TextButton(
-              onPressed: onPressed,
-              child: Text(
-                "Try again",
-                textAlign: TextAlign.center,
-                style: AppTextStyles.styleMedium20(context)
-                    .copyWith(color: Colors.redAccent),
-              )),
+          // TextButton(
+          //     onPressed: onPressed,
+          //     child: Text(
+          //       "Try again",
+          //       textAlign: TextAlign.center,
+          //       style: AppTextStyles.styleMedium20(context)
+          //           .copyWith(color: Colors.redAccent),
+          //     )),
         ],
       ),
     );

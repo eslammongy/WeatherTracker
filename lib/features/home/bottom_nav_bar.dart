@@ -37,7 +37,7 @@ class FloatingBottomNavBar extends StatelessWidget {
           ],
         ),
         child: SizedBox(
-          height: 90,
+          height: 85,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
