@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_tracker/core/utils/animated_dialog.dart';
-import 'package:weather_tracker/features/weather/presentation/views/screens/current_weather_screen.dart';
+import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_bloc.dart';
 import 'package:weather_tracker/features/weather/presentation/views/widgets/forecast/forecast_list_item.dart';
 
 class ForeCastScreen extends StatelessWidget {
@@ -8,21 +7,17 @@ class ForeCastScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final weatherRemoteBloc = WeatherRemoteBloc.get(context);
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
-        itemCount: 12,
+        itemCount: weatherRemoteBloc.forecastList.length,
         itemBuilder: (context, index) {
-          return InkWell(
-              onTap: () {
-                showAnimatedDialog(
-                  context,
-                  title: "Day-12/02/2022",
-                  body: const CurrentWeatherScreen(),
-                );
-              },
-              child: const ForecastListItem());
+          return ForecastListItem(
+            weatherData: weatherRemoteBloc.forecastList[index],
+          );
         },
       ),
     );

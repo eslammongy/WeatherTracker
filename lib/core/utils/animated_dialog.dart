@@ -53,7 +53,8 @@ Row _buildDialogTitle(ThemeData theme, String title, BuildContext context) {
             child: Text(
               title,
               textAlign: TextAlign.center,
-              style: AppTextStyles.styleSemiBold20(context),
+              style: AppTextStyles.styleSemiBold20(context)
+                  .copyWith(color: Colors.white),
             ),
           ),
         ),
@@ -75,7 +76,7 @@ Row _buildDialogTitle(ThemeData theme, String title, BuildContext context) {
 SlideTransition _dialogAnimation(Animation<double> anim, Widget child) {
   return SlideTransition(
     position:
-        Tween(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(anim),
+        Tween(begin: const Offset(1, 0), end: const Offset(0, 0)).animate(anim),
     child: child,
   );
 }

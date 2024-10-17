@@ -4,10 +4,10 @@ abstract class WeatherRemoteEvents extends Equatable {
   const WeatherRemoteEvents();
 }
 
-class FetchCurrentWeatherEvent extends WeatherRemoteEvents {
+class FetchHourlyWeatherEvent extends WeatherRemoteEvents {
   final double lat;
   final double lon;
-  const FetchCurrentWeatherEvent({
+  const FetchHourlyWeatherEvent({
     required this.lat,
     required this.lon,
   });

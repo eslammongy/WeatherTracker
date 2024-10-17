@@ -29,4 +29,4 @@ const dummyJson = {
       "temp": 19,
     }
   ]
-} ;
+};

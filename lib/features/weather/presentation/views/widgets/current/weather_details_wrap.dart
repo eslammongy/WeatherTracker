@@ -1,52 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:weather_tracker/features/weather/presentation/views/widgets/current/view_more_btn.dart';
+import 'package:weather_tracker/core/constants/app_assets.dart';
+import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
 import 'package:weather_tracker/features/weather/presentation/views/widgets/current/weather_info_card.dart';
 
+import 'view_more_btn.dart';
+
 class WeatherDetailsWrap extends StatelessWidget {
-  const WeatherDetailsWrap({super.key});
+  const WeatherDetailsWrap({super.key, required this.weatherData});
+  final WeatherData weatherData;
 
   @override
   Widget build(BuildContext context) {
-    return const Wrap(
-      direction: Axis.horizontal,
-      spacing: 10,
-      runSpacing: 10,
-      children: [
+    return GridView(
+      scrollDirection: Axis.vertical,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      padding: EdgeInsets.zero,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3, // 2 columns
+        crossAxisSpacing: 12, // Space between columns
+        mainAxisSpacing: 12, // Space between rows
+        mainAxisExtent: 150,
+      ),
+      children: gridChild,
+    );
+  }
+
+  List<Widget> get gridChild => [
         // Sunrise Info
         WeatherInfoCard(
-          icon: FontAwesomeIcons.solidSun,
-          title: 'Sunrise',
-          value: '06:00 AM',
+          iconPath: AppAssets.highTempIcon,
+          title: 'Max Temp',
+          value: "${weatherData.maxTemp}",
+        ),
+        WeatherInfoCard(
+          iconPath: AppAssets.lowTempIcon,
+          title: 'Min Temp',
+          value: "${weatherData.minTemp}",
         ),
         // Wind Speed Info
         WeatherInfoCard(
-          icon: FontAwesomeIcons.wind,
+          iconPath: AppAssets.windSpeed,
           title: 'Wind Speed',
-          value: '15 km/h',
-        ),
-        // Sunset Info
-        WeatherInfoCard(
-          icon: FontAwesomeIcons.solidMoon,
-          title: 'Sunset',
-          value: '06:45 PM',
+          value: '${weatherData.windSpd} km/h',
         ),
         // Humidity Info
         WeatherInfoCard(
-          icon: FontAwesomeIcons.droplet,
+          iconPath: AppAssets.humidity,
           title: 'Humidity',
-          value: '65%',
+          value: '${weatherData.humidity} %',
         ),
         WeatherInfoCard(
-          icon: FontAwesomeIcons.wind,
-          title: 'Wind Speed',
-          value: '15 km/h',
+          iconPath: AppAssets.cloudIcon,
+          title: 'Clouds',
+          value: '${weatherData.clouds} km/h',
         ),
-        ViewMoreBtn(
-          width: 125,
-          height: 125,
-        ),
-      ],
-    );
-  }
+        ViewMoreBtn(weatherData: weatherData)
+      ];
 }

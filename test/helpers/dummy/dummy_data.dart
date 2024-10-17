@@ -7,8 +7,8 @@ const dummyJson = {
   "country_code": "US",
   "data": [
     {
-      "max_temp": 22.6,
-      "min_temp": 16.2,
+      "max_temp": 22,
+      "min_temp": 16,
       "clouds": 75,
       "datetime": "2024-10-03",
       "weather": {"icon": "r01d", "description": "Light rain", "code": 500},
@@ -18,8 +18,8 @@ const dummyJson = {
       "temp": 19,
     },
     {
-      "max_temp": 24.0,
-      "min_temp": 16.4,
+      "max_temp": 24,
+      "min_temp": 16,
       "clouds": 68,
       "datetime": "2024-10-04",
       "weather": {
@@ -40,8 +40,8 @@ final testWeather = WeatherEntity(
   countryCode: "EG",
   weatherData: [
     WeatherData(
-      maxTemp: 22.0,
-      minTemp: 20.0,
+      maxTemp: 22,
+      minTemp: 20,
       description: "Cloudy",
       icon: "10d",
       clouds: 11,
@@ -52,8 +52,8 @@ final testWeather = WeatherEntity(
       windSpd: 90.9,
     ),
     WeatherData(
-      maxTemp: 22.0,
-      minTemp: 20.0,
+      maxTemp: 22,
+      minTemp: 20,
       description: "Cloudy",
       icon: "10d",
       clouds: 11,
@@ -71,8 +71,8 @@ final testWeatherModel = WeatherModel(
   countryCode: "EG",
   weatherData: [
     WeatherData(
-      maxTemp: 22.0,
-      minTemp: 20.0,
+      maxTemp: 22,
+      minTemp: 20,
       description: "Cloudy",
       icon: "10d",
       clouds: 11,
@@ -83,8 +83,8 @@ final testWeatherModel = WeatherModel(
       windSpd: 90.9,
     ),
     WeatherData(
-      maxTemp: 22.0,
-      minTemp: 20.0,
+      maxTemp: 22,
+      minTemp: 20,
       description: "Cloudy",
       icon: "10d",
       clouds: 11,

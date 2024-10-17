@@ -12,6 +12,11 @@ Future<void> main() async {
   await injector.initDependencies();
   await Future.delayed(const Duration(milliseconds: 200), () {
     FlutterNativeSplash.remove();
+    // runApp(
+    //   DevicePreview(
+    //     builder: (context) => const MyWeatherApp(),
+    //   ),
+    // );
     runApp(
       const MyWeatherApp(),
     );
@@ -25,7 +30,9 @@ class MyWeatherApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => WeatherRemoteBloc(
-        fetchForecastWeatherUseCase: injector.getIt(),
+        fetchHourlyWeather: injector.getIt(),
+        fetchForecastWeather: injector.getIt(),
+        fetchWeatherByCityName: injector.getIt(),
       ),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,7 +1,8 @@
-import '../../helpers/dummy/dummy_data.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_tracker/features/weather/data/models/weather_model.dart';
 import 'package:weather_tracker/features/weather/domain/entities/weather_data.dart';
+
+import '../../helpers/dummy/dummy_data.dart';
 
 void main() {
   final testWeather = WeatherModel(
@@ -9,8 +10,8 @@ void main() {
     countryCode: "US",
     weatherData: [
       WeatherData(
-        maxTemp: 22.6,
-        minTemp: 16.2,
+        maxTemp: 22,
+        minTemp: 16,
         description: "Light rain",
         icon: "r01d",
         clouds: 75,
@@ -22,8 +23,8 @@ void main() {
         datetime: DateTime.tryParse("2024-10-03"),
       ),
       WeatherData(
-        maxTemp: 24.0,
-        minTemp: 16.4,
+        maxTemp: 24,
+        minTemp: 16,
         description: "Thunderstorm with heavy rain",
         icon: "t03d",
         clouds: 68,

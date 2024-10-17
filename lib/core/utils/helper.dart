@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 
-const pubBoxDecoration = BoxDecoration(
-  borderRadius: BorderRadius.all(Radius.circular(100)),
-  gradient: LinearGradient(
+var pubBoxDecoration = BoxDecoration(
+  borderRadius: const BorderRadius.all(Radius.circular(100)),
+  boxShadow: [staticBoxShadow],
+  gradient: const LinearGradient(
     colors: [
       Color(0xFF5F20F1),
       Color(0xFF831D95),
@@ -89,8 +91,32 @@ void displaySnackBar(
 }
 
 get staticBoxShadow => BoxShadow(
-      color: Colors.grey.withOpacity(0.2), // Shadow color with transparency
-      spreadRadius: 1, // How far the shadow extends
+      color: Colors.black.withOpacity(0.2), // Shadow color with transparency
+      spreadRadius: 2, // How far the shadow extends
       blurRadius: 2, // Blur effect
       offset: const Offset(1, 1), // Shadow position (x, y)
     );
+
+String extractTime(int? time) {
+  if (time == null) {
+    return "";
+  }
+  final datetime = DateTime.fromMicrosecondsSinceEpoch(time);
+  return DateFormat('h:mm a').format(datetime);
+}
+
+String extractDateTime(DateTime? dateTime) {
+  if (dateTime == null) {
+    return "";
+  }
+  return DateFormat.yMMMMEEEEd().format(dateTime);
+}
+
+DateTime validateDatetime(String strDate) {
+  final dateString = strDate.replaceFirst(':', ' ');
+  // Define the format pattern for the input string
+  DateFormat format = DateFormat('yyyy-MM-dd HH');
+  // Parse the string into a DateTime object
+  DateTime parsedDate = format.parse(dateString);
+  return parsedDate;
+}

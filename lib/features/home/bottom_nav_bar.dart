@@ -19,43 +19,55 @@ class FloatingBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-      elevation: 4,
-      color: context.theme.appColors.surface,
-      shadowColor: Colors.indigo.shade900,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: SizedBox(
-        height: 80,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            BottomNavItem(
-              title: "Weather",
-              icon: FontAwesomeIcons.cloudSun,
-              isActive: currentIndex == 0 ? true : false,
-              onTap: () {
-                getCurrentIndex(0);
-              },
-            ),
-            BottomNavItem(
-              title: "Forecast",
-              icon: FontAwesomeIcons.snowflake,
-              isActive: currentIndex == 1 ? true : false,
-              onTap: () {
-                getCurrentIndex(1);
-              },
-            ),
-            BottomNavItem(
-              title: "Search",
-              icon: FontAwesomeIcons.magnifyingGlass,
-              isActive: currentIndex == 2 ? true : false,
-              onTap: () {
-                getCurrentIndex(2);
-              },
-            ),
+    final appColors = context.theme.appColors;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(14)),
+          color: appColors.surface,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black
+                  .withOpacity(0.3), // Shadow color with transparency
+              spreadRadius: 6, // How far the shadow extends
+              blurRadius: 4, // Blur effect
+              offset: const Offset(1, 1), // Shadow position (x, y)
+            )
           ],
+        ),
+        child: SizedBox(
+          height: 85,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              BottomNavItem(
+                title: "Weather",
+                icon: FontAwesomeIcons.cloudSun,
+                isActive: currentIndex == 0 ? true : false,
+                onTap: () {
+                  getCurrentIndex(0);
+                },
+              ),
+              BottomNavItem(
+                title: "Forecast",
+                icon: Icons.thermostat_auto_rounded,
+                isActive: currentIndex == 1 ? true : false,
+                onTap: () {
+                  getCurrentIndex(1);
+                },
+              ),
+              BottomNavItem(
+                title: "Search",
+                icon: FontAwesomeIcons.magnifyingGlass,
+                isActive: currentIndex == 2 ? true : false,
+                onTap: () {
+                  getCurrentIndex(2);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
