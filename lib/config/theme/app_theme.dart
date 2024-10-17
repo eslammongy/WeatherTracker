@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:weather_tracker/config/theme/app_colors_extension.dart';
 
 class AppTheme {
-  final ThemeMode _themeMode = ThemeMode.system;
-
-  ThemeMode get themeMode => _themeMode;
-
   static final light = () {
     final defaultTheme = ThemeData.light();
 

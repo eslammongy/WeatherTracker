@@ -20,7 +20,7 @@ class SkeletonLoadingWidget extends StatelessWidget {
           Lottie.asset(
             AppAssets.animatedLoading,
             backgroundLoading: false,
-            height: 280,
+            height: 320,
           ),
           const SizedBox(height: 15),
           // Grid for other skeleton weather data
