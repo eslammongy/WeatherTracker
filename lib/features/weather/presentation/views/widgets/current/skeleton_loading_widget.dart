@@ -31,15 +31,11 @@ class SkeletonLoadingWidget extends StatelessWidget {
             padding: EdgeInsets.zero,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3, // 2 columns
-              crossAxisSpacing: 6, // Space between columns
-              mainAxisSpacing: 6, // Space between rows
+              crossAxisSpacing: 12, // Space between columns
+              mainAxisSpacing: 12, // Space between rows
               mainAxisExtent: 150,
             ),
             children: const [
-              SkeletonShape(
-                  borderRadius: BorderRadius.all(Radius.circular(16)),
-                  width: 130,
-                  height: 130),
               SkeletonShape(
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                   width: 130,

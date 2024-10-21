@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:weather_tracker/features/weather/presentation/views/widgets/location_request_dialog.dart';
 
 abstract class LocationServices {
   static double? lat;
   static double? lon;
-  static void Function()? onDenied;
+  static BuildContext? _context;
+
+  static setContext(BuildContext value) {
+    _context = value;
+  }
+
   static void Function(double lat, double lon)? callback;
 
   static Future<void> initLocationServices() async {
@@ -41,7 +47,11 @@ abstract class LocationServices {
         await _getCurrentPosition();
       } else {
         debugPrint("Location Permission Denied:: $value");
-        if (onDenied != null) onDenied!();
+        // should request and ask user for permission
+
+        if (_context != null) {
+          showLocationRequestDialog(_context!);
+        }
       }
     });
   }

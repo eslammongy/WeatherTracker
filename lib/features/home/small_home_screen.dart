@@ -12,7 +12,6 @@ import 'package:weather_tracker/features/weather/presentation/bloc/remote/weathe
 import 'package:weather_tracker/features/weather/presentation/views/screens/forecast_screen.dart';
 import 'package:weather_tracker/features/weather/presentation/views/screens/search_for_city_screen.dart';
 import 'package:weather_tracker/features/weather/presentation/views/screens/today_weather_screen.dart';
-import 'package:weather_tracker/features/weather/presentation/views/widgets/location_request_dialog.dart';
 
 class SmallHomeScreen extends StatefulWidget {
   const SmallHomeScreen({super.key});
@@ -60,7 +59,7 @@ class _SmallHomeScreenState extends State<SmallHomeScreen> {
   }
 
   setLocationServices(BuildContext context) async {
-    LocationServices.onDenied = () => showLocationRequestDialog(context);
+    LocationServices.setContext(context);
     await LocationServices.initLocationServices();
     LocationServices.callback = (lat, lon) {
       WeatherRemoteBloc.get(context).add(
