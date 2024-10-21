@@ -106,7 +106,7 @@ void main() {
           .thenAnswer((_) async => 1);
       // act
       final result = await weatherRepositoryImpl.saveWeatherDataLocally(
-        data: testWeather,
+        entity: testWeather,
       );
       // assertion
       expect(result, equals(const Right(1)));

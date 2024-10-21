@@ -16,7 +16,7 @@ class SkeletonList extends StatelessWidget {
           itemCount: 8,
           itemBuilder: (context, index) {
             return const Padding(
-              padding: EdgeInsets.only(right: 8.0),
+              padding: EdgeInsets.only(right: 10),
               child: SkeletonShape(
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                   width: 130,

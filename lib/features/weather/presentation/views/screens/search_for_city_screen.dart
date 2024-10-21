@@ -72,16 +72,19 @@ class SearchForCityScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const SizedBox(
-          height: 160,
+        SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.2,
         ),
         SvgPicture.asset(
           AppAssets.searchImg,
           width: 300,
         ),
+        const SizedBox(
+          height: 10,
+        ),
         Text(
           "try to write the name of city...",
-          style: AppTextStyles.styleMedium20(context),
+          style: AppTextStyles.styleSemiBold24(context),
         )
       ],
     );

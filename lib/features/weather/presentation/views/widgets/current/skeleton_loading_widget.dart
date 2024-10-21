@@ -56,6 +56,10 @@ class SkeletonLoadingWidget extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                   width: 130,
                   height: 130),
+              /* SkeletonShape(
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                  width: 130,
+                  height: 130),*/
             ],
           ),
 
