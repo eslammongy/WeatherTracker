@@ -4,6 +4,10 @@ import 'package:weather_tracker/core/utils/size_config.dart';
 import 'package:weather_tracker/features/home/adaptive_layout.dart';
 import 'package:weather_tracker/features/home/large_home_screen.dart';
 import 'package:weather_tracker/features/home/medium_home_screen.dart';
+import 'package:weather_tracker/features/home/small_home_screen.dart';
+import 'package:weather_tracker/features/weather/presentation/bloc/local/weather_local_bloc.dart';
+import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_bloc.dart';
+import 'package:weather_tracker/service_locator.dart' as injector;
 
 class AdaptiveHomeScreen extends StatelessWidget {
   const AdaptiveHomeScreen({super.key});

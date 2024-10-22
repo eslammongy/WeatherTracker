@@ -36,7 +36,7 @@ class CurrentLocationCity extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  "${weather!.cityName}, ${weather!.countryCode}",
+                  "${weather!.cityName ?? ""}, ${weather!.countryCode ?? ""}",
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.styleMedium16(context)
                       .copyWith(color: Colors.white),
