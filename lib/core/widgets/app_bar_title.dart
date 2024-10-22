@@ -8,6 +8,7 @@ import 'package:weather_tracker/core/utils/internet_checker_service.dart';
 import 'package:weather_tracker/core/widgets/current_location_city.dart';
 import 'package:weather_tracker/features/weather/domain/entities/weather_entity.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/local/weather_local_bloc.dart';
+import 'package:weather_tracker/features/weather/presentation/bloc/local/weather_local_states.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_bloc.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_states.dart';
 
@@ -17,11 +18,45 @@ class AppBarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
-    final weatherRemoteBloc = WeatherRemoteBloc.get(context);
     final localWeatherBloc = WeatherLocalBloc.get(context);
     return BlocBuilder<WeatherRemoteBloc, WeatherRemoteStates>(
       builder: (context, state) {
         bool hasSuccessfulRequest = state is WeatherRemoteFetchSuccessState;
+        if (state is WeatherRemoteFetchSuccessState) {
+          return buildBarTitleRow(
+            context,
+            state.weatherEntity!,
+            hasSuccessfulRequest,
+            width,
+          );
+        } else if (state is WeatherRemoteFailureState) {
+          return buildBarTitleRow(
+            context,
+            localWeatherBloc.weatherEntity,
+            false,
+            width,
+          );
+        } else {
+          return buildBarTitleRow(
+            context,
+            WeatherEntity(),
+            hasSuccessfulRequest,
+            width,
+          );
+        }
+      },
+    );
+  }
+
+  Widget buildBarTitleRow(
+    BuildContext context,
+    WeatherEntity? entity,
+    bool hasSuccessfulRequest,
+    double width,
+  ) {
+    final remoteWeatherBloc = WeatherRemoteBloc.get(context);
+    return BlocBuilder<WeatherLocalBloc, WeatherLocalStates>(
+      builder: (context, state) {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -44,7 +79,9 @@ class AppBarTitle extends StatelessWidget {
             ),
             Text(
               getLatestUpdate(
-                  getWeatherEntity(weatherRemoteBloc, localWeatherBloc)),
+                remoteWeatherBloc,
+                state,
+              ),
               style: AppTextStyles.styleSemiBold18(context),
             ),
             const SizedBox(
@@ -54,8 +91,10 @@ class AppBarTitle extends StatelessWidget {
                 width: width * 0.3,
                 height: 45,
                 child: CurrentLocationCity(
-                  weather:
-                      getWeatherEntity(weatherRemoteBloc, localWeatherBloc),
+                  weather: getWeatherEntity(
+                    remoteWeatherBloc,
+                    state,
+                  ),
                 ))
           ],
         );
@@ -63,11 +102,20 @@ class AppBarTitle extends StatelessWidget {
     );
   }
 
-  String getLatestUpdate(WeatherEntity? weather) {
-    if (weather == null) return "00:00";
-    final today = weather.weatherData?.first;
-    final lastUpdatedTime =
-        extractTime(today!.datetime!.microsecondsSinceEpoch);
+  String getLatestUpdate(
+    WeatherRemoteBloc remoteWeatherBloc,
+    WeatherLocalStates localState,
+  ) {
+    final today = getWeatherEntity(remoteWeatherBloc, localState);
+    String lastUpdatedTime = "00:00";
+    if (today.data.isEmpty) {
+      final firstDay =
+          today.weatherData?.first.datetime!.microsecondsSinceEpoch;
+      lastUpdatedTime = extractTime(firstDay);
+    } else if (today.data.isNotEmpty) {
+      final firstDay = today.data?.first.datetime!.microsecondsSinceEpoch;
+      lastUpdatedTime = extractTime(firstDay);
+    }
     return "last update $lastUpdatedTime";
   }
 
@@ -80,19 +128,16 @@ class AppBarTitle extends StatelessWidget {
     );
   }
 
-  WeatherEntity? getWeatherEntity(
+  WeatherEntity getWeatherEntity(
     WeatherRemoteBloc remoteWeatherBloc,
-    WeatherLocalBloc localWeatherBloc,
+    WeatherLocalStates localState,
   ) {
-    final state = remoteWeatherBloc.state;
-    if (state is WeatherRemoteFetchSuccessState) {
-      return state.weatherEntity;
-    } else if (remoteWeatherBloc.weatherEntity != null) {
+    if (remoteWeatherBloc.weatherEntity != null) {
       return remoteWeatherBloc.weatherEntity!;
-    } else if (localWeatherBloc.weatherEntity != null) {
-      return localWeatherBloc.weatherEntity!;
+    } else if (localState is WeatherLocalFetchedState) {
+      return localState.weatherEntity;
     } else {
-      return null;
+      return WeatherEntity();
     }
   }
 }

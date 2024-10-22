@@ -40,6 +40,10 @@ class WeatherRemoteBloc extends Bloc<WeatherRemoteEvents, WeatherRemoteStates> {
       lon: event.lon,
     );
     result.fold((failure) {
+      _addingFailedRequestToRetryQueue(
+        failure,
+        FetchForecastWeatherEvent(lon: event.lon, lat: event.lat),
+      );
       emit(WeatherRemoteFailureState(failure: failure));
     }, (data) {
       forecastList.addAll(data.weatherData!.skip(1));
@@ -70,7 +74,9 @@ class WeatherRemoteBloc extends Bloc<WeatherRemoteEvents, WeatherRemoteStates> {
     final result = await fetchWeatherByCityName.execute(name: event.cityName);
     result.fold((failure) {
       _addingFailedRequestToRetryQueue(
-          failure, FetchCityWeatherEvent(cityName: event.cityName));
+        failure,
+        FetchCityWeatherEvent(cityName: event.cityName),
+      );
       emit(WeatherRemoteFailureState(failure: failure));
     }, (data) {
       debugPrint("Request Success::${data.cityName}");
@@ -79,9 +85,9 @@ class WeatherRemoteBloc extends Bloc<WeatherRemoteEvents, WeatherRemoteStates> {
   }
 
   void _addingFailedRequestToRetryQueue(
-      Failure failure, FetchCityWeatherEvent event) {
+      Failure failure, WeatherRemoteEvents event) {
     debugPrint(
-        "Adding request to retry queue: ${event.cityName}..Failure: ${failure.exceptionType}");
+        "Adding request to retry queue: ${event.runtimeType}..Failure: ${failure.exceptionType}");
     if (failure.exceptionType == DioExceptionType.connectionError) {
       DioService.addEventToRetryQueue(() => add(event));
     }

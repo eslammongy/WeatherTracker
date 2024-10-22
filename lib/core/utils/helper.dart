@@ -91,6 +91,7 @@ void displayToastMsg(
         child: Center(
           child: Card(
             color: theme.appColors.primary,
+            margin: const EdgeInsets.only(top: 60),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
               child: Text(

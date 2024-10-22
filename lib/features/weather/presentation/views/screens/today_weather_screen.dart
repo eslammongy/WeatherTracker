@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_tracker/core/utils/helper.dart';
-import 'package:weather_tracker/core/widgets/custom_error_widget.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/local/weather_local_bloc.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/local/weather_local_events.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/local/weather_local_states.dart';
@@ -29,6 +28,11 @@ class TodayWeatherScreen extends StatelessWidget {
               displayToastMsg(context, "offline weather data updated...");
             }
           }
+          if (state is WeatherLocalFetchedState) {
+            if (context.mounted) {
+              displayToastMsg(context, "offline weather data fetched...");
+            }
+          }
         },
         builder: (context, state) {
           if (state is WeatherLocalFetchedState) {
@@ -51,11 +55,8 @@ class TodayWeatherScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is WeatherRemoteFetchSuccessState) {
           // should update the offline data
-
           localWeatherBloc.add(
-            SaveWeatherDataLocallyEvent(
-              entity: state.weatherEntity,
-            ),
+            SaveWeatherDataLocallyEvent(entity: state.weatherEntity),
           );
         }
         if (state is WeatherRemoteFailureState &&
@@ -78,10 +79,12 @@ class TodayWeatherScreen extends StatelessWidget {
             subView: const HourlyWeatherData(),
             subViewTitle: "Hourly",
           );
-        } else if (state is WeatherRemoteFailureState) {
-          // should show error message here
-          return CustomErrorWidget(failure: state.failure);
-        } else {
+        }
+        // else if (state is WeatherRemoteFailureState) {
+        //   // should show error message here
+        //   return CustomErrorWidget(failure: state.failure);
+        // }
+        {
           // should show the loading skeleton here
           return const SkeletonLoadingWidget();
         }

@@ -46,7 +46,8 @@ class WeatherLocalBloc extends Bloc<WeatherLocalEvents, WeatherLocalStates> {
       emit(WeatherLocalFailureState(failure: failure));
     }, (entity) {
       forecastList.addAll(entity.data);
-      emit(WeatherLocalFetchedState(weatherEntity: weatherEntity = entity));
+      weatherEntity = entity;
+      emit(WeatherLocalFetchedState(weatherEntity: entity));
     });
   }
 }
