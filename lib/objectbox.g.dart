@@ -30,7 +30,7 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(1, 6068282980129360363),
             name: 'id',
             type: 6,
-            flags: 1),
+            flags: 129),
         obx_int.ModelProperty(
             id: const obx_int.IdUid(2, 7834538198821526376),
             name: 'cityName',
@@ -225,14 +225,17 @@ obx_int.ModelDefinition getObjectBoxModel() {
         objectFromFB: (obx.Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           final cityNameParam = const fb.StringReader(asciiOptimization: true)
               .vTableGetNullable(buffer, rootOffset, 6);
           final countryCodeParam =
               const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 8);
           final object = WeatherEntity(
-              cityName: cityNameParam, countryCode: countryCodeParam)
-            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+              id: idParam,
+              cityName: cityNameParam,
+              countryCode: countryCodeParam);
           obx_int.InternalToManyAccess.setRelInfo<WeatherEntity>(
               object.data,
               store,

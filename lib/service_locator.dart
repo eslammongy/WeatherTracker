@@ -7,14 +7,15 @@ import 'package:weather_tracker/features/weather/domain/repository/weather_repos
 import 'package:weather_tracker/features/weather/domain/usecaces/fetch_city_weather_use_case.dart';
 import 'package:weather_tracker/features/weather/domain/usecaces/fetch_current_weather_use_case.dart';
 import 'package:weather_tracker/features/weather/domain/usecaces/fetch_forecast_weather_use_case.dart';
+import 'package:weather_tracker/features/weather/domain/usecaces/fetch_locally_weather_use_case.dart';
+import 'package:weather_tracker/features/weather/domain/usecaces/save_weather_locally_use_case.dart';
 import 'package:weather_tracker/features/weather/presentation/bloc/remote/weather_remote_bloc.dart';
 
-import 'core/utils/internet_checker_service.dart';
+import 'features/weather/presentation/bloc/local/weather_local_bloc.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> initDependencies() async {
-  InternetConnectivityChecker.init();
   final objectBoxDb = await WeatherDbBox.create();
   //** Dio */
   getIt.registerLazySingleton<Dio>(() => Dio());
@@ -52,12 +53,31 @@ Future<void> initDependencies() async {
     ),
   );
 
+  // local use case
+  getIt.registerLazySingleton<SaveWeatherLocallyUseCase>(
+    () => SaveWeatherLocallyUseCase(
+      weatherRepository: getIt(),
+    ),
+  );
+  getIt.registerLazySingleton<FetchLocallyWeatherUseCase>(
+    () => FetchLocallyWeatherUseCase(
+      weatherRepository: getIt(),
+    ),
+  );
+
   //** Blocs */
   getIt.registerFactory<WeatherRemoteBloc>(
     () => WeatherRemoteBloc(
       fetchHourlyWeather: getIt(),
       fetchForecastWeather: getIt(),
       fetchWeatherByCityName: getIt(),
+    ),
+  );
+
+  getIt.registerFactory<WeatherLocalBloc>(
+    () => WeatherLocalBloc(
+      saveWeatherLocallyUseCase: getIt(),
+      fetchLocallyWeatherUseCase: getIt(),
     ),
   );
 }

@@ -20,7 +20,7 @@ class SkeletonLoadingWidget extends StatelessWidget {
           Lottie.asset(
             AppAssets.animatedLoading,
             backgroundLoading: false,
-            height: 280,
+            height: 320,
           ),
           const SizedBox(height: 15),
           // Grid for other skeleton weather data
@@ -31,8 +31,8 @@ class SkeletonLoadingWidget extends StatelessWidget {
             padding: EdgeInsets.zero,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3, // 2 columns
-              crossAxisSpacing: 6, // Space between columns
-              mainAxisSpacing: 6, // Space between rows
+              crossAxisSpacing: 12, // Space between columns
+              mainAxisSpacing: 12, // Space between rows
               mainAxisExtent: 150,
             ),
             children: const [
@@ -56,10 +56,10 @@ class SkeletonLoadingWidget extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                   width: 130,
                   height: 130),
-              SkeletonShape(
+              /* SkeletonShape(
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                   width: 130,
-                  height: 130),
+                  height: 130),*/
             ],
           ),
 

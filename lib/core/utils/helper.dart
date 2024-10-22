@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:toastification/toastification.dart';
 import 'package:weather_tracker/config/theme/app_theme.dart';
 import 'package:weather_tracker/config/theme/text_style.dart';
 
@@ -69,25 +70,41 @@ Center displayLoadingWidget(
   ));
 }
 
-/// displaying a customized snackbar
-void displaySnackBar(
+/// displaying a customized snack-bar
+void displayToastMsg(
   BuildContext context,
   String msg, {
   bool hasError = false,
 }) {
   final theme = context.theme;
-  final snackBar = SnackBar(
-    content: Text(
-      msg,
-      style: theme.textTheme.bodyMedium,
-    ),
-    margin: const EdgeInsets.only(right: 20, left: 20, bottom: 20),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-    backgroundColor: hasError ? theme.appColors.error : theme.appColors.primary,
-    duration: const Duration(seconds: 5),
-    behavior: SnackBarBehavior.floating,
+  final toast = toastification.show(
+    context: context,
+    type: ToastificationType.success,
+    style: ToastificationStyle.fillColored,
+    backgroundColor: theme.appColors.primary,
+    alignment: Alignment.center,
+    animationDuration: const Duration(milliseconds: 300),
+    autoCloseDuration: const Duration(milliseconds: 1000),
+    animationBuilder: (context, animation, alignment, child) {
+      return FadeTransition(
+        opacity: animation,
+        child: Center(
+          child: Card(
+            color: theme.appColors.primary,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+              child: Text(
+                msg,
+                style: AppTextStyles.styleMedium20(context),
+              ),
+            ),
+          ),
+        ),
+      );
+    },
   );
-  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+  toastification.dismiss(toast);
 }
 
 get staticBoxShadow => BoxShadow(

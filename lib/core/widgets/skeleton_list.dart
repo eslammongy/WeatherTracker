@@ -15,10 +15,13 @@ class SkeletonList extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: 8,
           itemBuilder: (context, index) {
-            return const SkeletonShape(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-                width: 130,
-                height: 130);
+            return const Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: SkeletonShape(
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                  width: 130,
+                  height: 130),
+            );
           },
         ),
       ),

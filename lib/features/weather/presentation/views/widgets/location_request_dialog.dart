@@ -31,9 +31,11 @@ void showLocationRequestDialog(BuildContext context) {
           ),
           ElevatedButton(
             onPressed: () async {
+              // Request location permission
               await LocationServices.requestLocationPermission();
+              // // Close the dialog after permission request completes
               if (context.mounted) {
-                Navigator.of(context).pop(); // Close dialog
+                Navigator.of(context).pop();
               }
             },
             style: ElevatedButton.styleFrom(

@@ -79,10 +79,10 @@ class WeatherRepositoryImpl implements WeatherRepository {
   }
 
   @override
-  Future<Either<Failure, List<WeatherEntity>>> fetchLocallyWeatherData() async {
+  Future<Either<Failure, WeatherEntity>> fetchLocallyWeatherData() async {
     try {
-      final result = await weatherDbBox.weatherBox.getAllAsync();
-      if (result.isEmpty) {
+      final result = await weatherDbBox.weatherBox.getAsync(1);
+      if (result == null) {
         return Left(
             DBFailure(message: "There no data saved in local database"));
       } else {
@@ -95,10 +95,14 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
   @override
   Future<Either<Failure, int>> saveWeatherDataLocally({
-    required WeatherEntity data,
+    required WeatherEntity entity,
   }) async {
     try {
-      final result = await weatherDbBox.weatherBox.putAsync(data);
+      entity.data.addAll(entity.weatherData!);
+      for (var element in entity.weatherData!) {
+        weatherDbBox.weatherDataBox.put(element);
+      }
+      final result = await weatherDbBox.weatherBox.putAsync(entity);
       return Right(result);
     } catch (e) {
       return Left(DBFailure(message: "$e"));

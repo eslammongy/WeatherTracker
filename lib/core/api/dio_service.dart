@@ -36,24 +36,6 @@ class DioService {
       ),
     );
   }
-  //
-  // Future<void> _retryRequest(RequestOptions requestOptions) async {
-  //   try {
-  //     debugPrint('Retrying request: ${requestOptions.uri}');
-  //     Response response = await dio.request(
-  //       requestOptions.path,
-  //       options: Options(
-  //         method: requestOptions.method,
-  //         headers: requestOptions.headers,
-  //       ),
-  //       data: requestOptions.data,
-  //       queryParameters: requestOptions.queryParameters,
-  //     );
-  //     debugPrint('Request successful: ${response.data}');
-  //   } catch (e) {
-  //     debugPrint('Failed to retry request: $e');
-  //   }
-  // }
 
   void _listenToConnectivityChanges() {
     InternetConnectivityChecker.startListening(
